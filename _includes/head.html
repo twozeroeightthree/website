@@ -1,0 +1,16 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% assign description = page.description | default: page.excerpt | default: site.description | strip_html }
+    <meta name="description" content="{{ description }}">
+    {% assign title = page.title | default: site.title | escape %}
+    {% if title == 2083 %}
+    <title>{{ site.title }}</title>
+    {% else %}
+    <title>{{ site.title }} - {{ page.title }}</title>
+    {% endif %}
+    <link rel="stylesheet" href="/assets/reset.css">
+    <link rel="stylesheet" href="/assets/main.css">
+    <script src="/assets/jquery-3.2.1.min.js"></script>
+    <script src="/assets/scripts.js"></script>
+</head>

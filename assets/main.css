@@ -1,0 +1,123 @@
+/* General styles */
+body{
+  padding: 25px;
+  font-family: verdana;
+  font-size: 16px;
+}
+
+a { color:black; }
+a:hover { text-decoration: none; }
+
+h1 { font-size: 30px; font-weight: bold;}
+h2 { font-size: 24px; font-weight: bold;}
+h3 { font-size: 20px; font-weight: bold;}
+
+#title a{ text-decoration:none; }
+
+/* Structure of the website */
+
+.panel{ /* Left panel, description */
+  width: 450px;
+  height: 500px;
+
+  position: absolute;
+  top: 70px;
+  left: 25px;
+}
+
+.media{ /* Right section, media and content */
+  position: relative;
+  top: 0;
+  left: 480px;
+  display: inline-block;
+}
+
+/* Footer */
+
+footer{
+  width: 450px;
+  position: absolute;
+  top: 585px;
+}
+
+footer h3 {
+  font-size: 11px;
+  margin-bottom: 25px;
+}
+
+footer h3 a{
+  font-size: 16px;
+  text-decoration: none;
+}
+
+footer.footer-post ul, footer.footer-post ul a{
+  color: rgb(175, 175, 175);
+  text-decoration: none;
+  font-size: 12px;
+}
+footer.footer-post ul a:hover{
+  color:black;
+}
+footer.footer-post li {
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+footer.footer-post li:after {
+  content:" / ";
+}
+
+footer.footer-post li:last-child:after {
+  content:"";
+}
+
+/* Home styles */
+
+.panel.home p{
+  font-size: 20px;
+  line-height: 1.2em;
+  word-spacing: 1px;
+  color: rgb(150, 150, 150);
+}
+
+#slideshow {
+  white-space:nowrap;
+}
+
+#slideshow .element{
+  display: inline-block;
+}
+#slideshow .element .description{
+  visibility: hidden;
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  z-index: 10;
+  box-sizing: border-box;
+  color: white;
+  line-height: 1.5em;
+}
+#slideshow .element a:hover{
+  text-decoration: none;
+  height: 500px;
+}
+
+#slideshow .element img{
+  height: 500px;
+  position: relative;
+  top:-250px;
+}
+
+/* Post styles */
+
+.panel.post h2, .panel.post h3{
+  color: rgb(150, 150, 150);
+  font-weight: normal;
+}
+.panel.post h2 { margin-bottom: 0.5em;}
+.panel.post h3 { margin-bottom: 1em;}
+.panel.post p {
+  font-size: 16px;
+}

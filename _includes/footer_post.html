@@ -1,0 +1,15 @@
+<footer class="footer-post">
+  <h3>
+    <a href="/">2083.com</a>
+    /
+    © Brendan McCormick - all rights reserved 2017
+  </h3>
+  <ul>
+    <li>List of project names</li>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url | relative_url}}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
+</footer>

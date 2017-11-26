@@ -1,0 +1,14 @@
+title: "2083"
+author: "2083"
+description: "A showcase for contemporary art pieces located somewhere between art and design. Informed by a simple impulse or thought and influenced by process and circumstance, the work attempts to present the qualities inherent in an object or material."
+baseurl: "/"
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+lang: en
+
+plugins: [jekyll-paginate]
+
+permalink: /:title/
+paginate_path: /projects/:num/
+paginate: 5
+
+exclude: [ref.pdf, README.md, compile.sh, _posts/2000-01-01-template.html]
