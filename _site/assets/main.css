@@ -19,7 +19,6 @@ h3 { font-size: 20px; font-weight: bold;}
 .panel{ /* Left panel, description */
   width: 450px;
   height: 500px;
-
   position: absolute;
   top: 70px;
   left: 25px;
@@ -27,7 +26,7 @@ h3 { font-size: 20px; font-weight: bold;}
 
 .media{ /* Right section, media and content */
   position: relative;
-  top: 0;
+  top: -28px;             /* TO BE CHANGED  */
   left: 480px;
   display: inline-block;
 }
@@ -78,6 +77,9 @@ footer.footer-post li:last-child:after {
   line-height: 1.2em;
   word-spacing: 1px;
   color: rgb(150, 150, 150);
+  -webkit-transition: width 2s, height 4s; /* For Safari 3.1 to 6.0 */
+  transition: width 2s, height 4s;
+
 }
 
 #slideshow {
