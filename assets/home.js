@@ -6,6 +6,8 @@ $("#slideshow .element").each(function(){
   });
 });
 $("#slideshow").css("width", $(window).width()-505+"px")
+$("#nextbutton").fadeIn(100);
+
 
 var t = 1000;
 var index = 0;
