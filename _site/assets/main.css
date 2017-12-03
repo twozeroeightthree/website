@@ -85,7 +85,7 @@ footer.footer-post li:last-child:after {
 #slideshow {
   height: 500px;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: auto;
 }
 
 #slideshow .element{
