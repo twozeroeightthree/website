@@ -15,6 +15,7 @@ function onstart(){
   $("#nextbar").on("click",function(){
     next();
   });
+  updateBlocks();
 }
 
 $( window ).resize(function() {
