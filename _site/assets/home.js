@@ -1,7 +1,7 @@
 var t = 1000;
 var index = 0;
 var elements = $("#slideshow .element").length;
-var delta = ($(window).width()-125)/($(".element").first().width()+10));
+var delta = ($(window).width()-125)/($(".element").first().width()+10);
 
 function onstart(){
   $("#slideshow .element").each(function(){
@@ -29,7 +29,7 @@ $( window ).resize(function() {
 
 
 function updateDelta(){
-  delta = ($(window).width()-125)/($(".element").first().width()+10));
+  delta = ($(window).width()-125)/($(".element").first().width()+10);
 }
 function updateBlocks(){
   var n = Math.ceil(elements / delta);
