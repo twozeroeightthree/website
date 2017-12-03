@@ -25,7 +25,10 @@ function hide(){
 
 function goto(n){
   if (n>elements-1){
-    n=0;
+    n = 0;
+  }
+  else if (n<0) {
+    n = elements-1;
   }
   var pos = $("#slideshow .element").eq(n).position().left;
   $("#slideshow").animate({
@@ -38,10 +41,18 @@ function next(){
     hide();
   }
   else {
-    index+=2;
+    index += 2;
     goto(index);
   }
   if (index > elements-1){
-    index=0;
+    index = 0;
+  }
+}
+
+function previous(){
+  index -= 2;
+  goto(index);
+  if (index < 0){
+    index = elements-1;
   }
 }
