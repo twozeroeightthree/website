@@ -15,6 +15,21 @@ function onstart(){
   $("#nextbar").on("click",function(){
     next();
   });
+
+
+}
+function startBlocks(){
+  var futureDelta =  Math.floor($("#slideshow").width()/($(".element").first().width()+10));
+  var n = Math.ceil(elements/futureDelta);
+  $("#indicators .indicator").remove();
+    for (var i=0;i<n;i+=1){
+      $("#indicators").append('<div class="indicator"></div>');
+    }
+    $("#indicators .indicator").each(function( index ){
+      $( this ).on("click",function(){
+        gotoBlock(index);
+      });
+    });
 }
 $( window ).resize(function() {
   if ($("#description").is(":hidden")){
@@ -36,16 +51,20 @@ function updateBlocks(){
     for (var i=0;i<n;i+=1){
       $("#indicators").append('<div class="indicator"></div>');
     }
-  $("#indicators .indicator").each(function( index ){
-    $( this ).on("click",function(){
-      gotoBlock(index);
+    $("#indicators .indicator").each(function( index ){
+      $( this ).on("click",function(){
+        gotoBlock(index);
+      });
     });
-  });
-  activeBlock();
+}
+function activeBlock(){
+  $("#indicators .indicator").removeClass("active");
+  $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
 }
 function update(){
   updateDelta();
   updateBlocks();
+  activeBlock();
 }
 
 function hide(){
@@ -72,10 +91,6 @@ function goto(n){
 function gotoBlock(n){
   update();
   goto(n*delta);
-}
-function activeBlock(){
-  $("#indicators .indicator").removeClass("active");
-  $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
 }
 
 function next(){
