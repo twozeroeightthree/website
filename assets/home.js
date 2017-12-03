@@ -8,6 +8,7 @@ $("#slideshow .element").each(function(){
 $("#slideshow").css("width", $(window).width()-505+"px")
 
 var t = 1000;
+var index = 0;
 
 function hide(){
   $("#description").fadeOut(t);
@@ -24,4 +25,9 @@ function goto(n){
   $("#slideshow").animate({
     scrollLeft: $("#slideshow").scrollLeft()+pos
   }, t);
+}
+
+function next(){
+  index+=2;
+  goto(index);
 }
