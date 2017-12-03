@@ -20,13 +20,13 @@ function updateDelta(){
 }
 
 function hide(){
-  updateDelta();
-  updateBlocks();
   $("#description").fadeOut(t);
   $("#slideshow").animate({
     left:"100px",
     width:$(window).width()-125
   },t);
+  updateDelta();
+  updateBlocks();
 }
 
 $( window ).resize(function() {
