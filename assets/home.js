@@ -7,13 +7,13 @@ $("#slideshow .element").each(function(){
 });
 $("#slideshow").css("width", $(window).width()-505+"px")
 
-var t = 1500;
+var t = 1000;
 
 function hide(){
   $("#description").fadeOut(t);
   $("#slideshow").animate({
     left:"100px",
-    width:$(window).width()-100
+    width:$(window).width()-125
   }
   ,t);
 
