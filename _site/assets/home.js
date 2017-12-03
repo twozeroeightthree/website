@@ -15,15 +15,7 @@ function onstart(){
   $("#nextbar").on("click",function(){
     next();
   });
-  for (var i=0;i<Math.ceil(elements / delta);i+=1){
-    $("#indicators").append('<div class="indicator"></div>');
-  }
-  $("#indicators .indicator").each(function( index ){
-    $( this ).on("click",function(){
-      hide();
-    });
-  });
-
+  updateBlocks();
 }
 
 $( window ).resize(function() {
