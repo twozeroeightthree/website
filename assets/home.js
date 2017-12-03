@@ -43,6 +43,7 @@ function updateBlocks(){
       });
     });
     activeBlock();
+    console.log("aaa");
 }
 function activeBlock(){
   $("#indicators .indicator").removeClass("active");
@@ -82,7 +83,6 @@ function gotoBlock(n){
 function next(){
   if ($("#description").is(":visible")){
     hide();
-    update();
   }
   else {
     updateDelta();
