@@ -8,8 +8,9 @@
 > Total: 6h
 
 # to do
-- slideshow code
-- test with fake content
+- ¿automatize carrousel?
+- finish carrousel
 - refine styling
-- upload content
 - responsive
+- upload content
+
