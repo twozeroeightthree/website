@@ -88,7 +88,7 @@ footer.footer-post li:last-child:after {
 }
 
 #slideshow {
-  height: 500px;
+  height: 460px;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -110,14 +110,14 @@ footer.footer-post li:last-child:after {
 }
 #slideshow .element a:hover{
   text-decoration: none;
-  height: 500px;
+  height: 460px;
 }
 
 #slideshow .element img{
-  height: 500px;
+  height: 460px;
   width: 370px;
   position: relative;
-  top:-250px;
+  top:-230px;
   object-fit: cover;
 }
 
@@ -126,7 +126,7 @@ footer.footer-post li:last-child:after {
   top:27px;
   right:5px;
   width: 90px;
-  height: 500px;
+  height: 460px;
 }
 #nextbar:hover{ cursor: pointer;}
 
@@ -147,7 +147,8 @@ footer.footer-post li:last-child:after {
   top: -15px;
   left: 480px;
   height: 6px;
-  width: 300px;
+  max-width: 300px;
+  min-width: 25px;
 }
 #indicators .indicator{
   height: 100%;
