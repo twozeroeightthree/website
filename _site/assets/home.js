@@ -1,7 +1,7 @@
 var t = 1000;
 var index = 0;
 var elements = $("#slideshow .element").length;
-
+var delta = 2;
 $("#slideshow .element").each(function(){
   $(this).on("mouseenter", function(){
     $(this).find(".description").css("visibility","visible");
@@ -14,6 +14,9 @@ $("#nextbar").on("click",function(){
   next();
 });
 
+function updateDelta(){
+  delta = Math.floor($("#slideshow").width()/($(".element").first().width()+10));
+}
 
 function hide(){
   $("#description").fadeOut(t);
@@ -26,6 +29,9 @@ $( window ).resize(function() {
   $("#slideshow").width($(window).width()-125);
 });
 
+function gotoblock(n){
+
+}
 
 function goto(n){
   if (n>elements-1){
@@ -41,7 +47,7 @@ function goto(n){
 }
 
 function next(){
-  var delta = Math.floor($("#slideshow").width()/($(".element").first().width()+10));
+  updateDelta();
   if ($("#description").is(":visible")){
     hide();
   }
@@ -55,7 +61,7 @@ function next(){
 }
 
 function previous(){
-  var delta = Math.floor($("#slideshow").width()/($(".element").first().width()+10));
+  updateDelta();
   index -= delta;
   goto(index);
   if (index < 0){
