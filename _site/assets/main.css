@@ -41,7 +41,7 @@ h3 { font-size: 20px; font-weight: bold;}
 footer{
   width: 450px;
   position: absolute;
-  top: 540px;
+  top: 500px;
 }
 
 footer h3 {
@@ -145,7 +145,7 @@ footer.footer-post li:last-child:after {
 
 #indicators {
   position: relative;
-  top: -15px;
+  top: -23px;
   left: 480px;
   height: 6px;
   max-width: 300px;
