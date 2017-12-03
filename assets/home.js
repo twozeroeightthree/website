@@ -3,40 +3,33 @@ var index = 0;
 var elements = $("#slideshow .element").length;
 var delta = 2;
 
-$("#slideshow .element").each(function(){
-  $(this).on("mouseenter", function(){
-    $(this).find(".description").css("visibility","visible");
-  }).on("mouseleave", function(){
-    $(this).find(".description").css("visibility","hidden");
+function onstart(){
+  $("#slideshow .element").each(function(){
+    $(this).on("mouseenter", function(){
+      $(this).find(".description").css("visibility","visible");
+    }).on("mouseleave", function(){
+      $(this).find(".description").css("visibility","hidden");
+    });
   });
+  $("#slideshow").css("width", $(window).width()-505+"px");
+  $("#nextbar").on("click",function(){
+    next();
+  });
+}
+$( window ).resize(function() {
+  if ($("#description").is(":hidden")){
+    $("#slideshow").width($(window).width()-125);
+    update();
+  }
+  else{
+    $("#slideshow").css("width", $(window).width()-505+"px");
+  }
 });
-$("#slideshow").css("width", $(window).width()-505+"px");
-$("#nextbar").on("click",function(){
-  next();
-});
+
 
 function updateDelta(){
   delta = Math.floor($("#slideshow").width()/($(".element").first().width()+10));
 }
-
-function hide(){
-  $("#description").fadeOut(t);
-  $("#slideshow").animate({
-    left:"100px",
-    width:$(window).width()-125
-  },t);
-  updateDelta();
-  updateBlocks();
-}
-
-$( window ).resize(function() {
-  if ($("#description").is(":hidden")){
-    $("#slideshow").width($(window).width()-125);
-    updateDelta();
-    updateBlocks();
-  }
-});
-
 function updateBlocks(){
   var n = Math.ceil(elements / delta);
   $("#indicators .indicator").remove();
@@ -49,8 +42,17 @@ function updateBlocks(){
     });
   });
 }
-function gotoBlock(n){
-  goto(n*delta);
+function update(){
+  updateDelta();
+  updateBlocks();
+}
+
+function hide(){
+  $("#description").fadeOut(t);
+  $("#slideshow").animate({
+    left:"100px",
+    width:$(window).width()-125
+  },t,update());
 }
 
 function goto(n){
@@ -65,9 +67,13 @@ function goto(n){
     scrollLeft: $("#slideshow").scrollLeft()+pos
   }, t);
 }
+function gotoBlock(n){
+  update();
+  goto(n*delta);
+}
 
 function next(){
-  updateDelta();
+  update();
   if ($("#description").is(":visible")){
     hide();
   }
@@ -79,12 +85,13 @@ function next(){
     index = 0;
   }
 }
-
 function previous(){
-  updateDelta();
+  update();
   index -= delta;
   goto(index);
   if (index < 0){
     index = elements-1;
   }
 }
+
+onstart();
