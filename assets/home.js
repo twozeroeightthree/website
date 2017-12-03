@@ -9,6 +9,7 @@ $("#slideshow").css("width", $(window).width()-505+"px")
 
 var t = 1000;
 var index = 0;
+var elements = $("#slideshow .element").length;
 
 function hide(){
   $("#description").fadeOut(t);
@@ -20,6 +21,9 @@ function hide(){
 
 
 function goto(n){
+  if (n>elements-1){
+    n=0;
+  }
   var pos = $("#slideshow .element").eq(n).position().left;
   console.log(pos);
   $("#slideshow").animate({
@@ -31,7 +35,7 @@ function next(){
   if ($("#description").is(":visible")){
     hide();
   }
-  else{
+  else {
     index+=2;
     goto(index);
   }
