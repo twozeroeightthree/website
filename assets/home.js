@@ -14,7 +14,10 @@ function hide(){
   $("#slideshow").animate({
     left:"100px",
     width:$(window).width()-125
-  }
-  ,t);
-
+  },t);
 }
+
+$("#slideshow .element").click(function() {
+  var index = $( ".element" ).index( this );
+  console.log( "That was div index #" + index );
+});
