@@ -142,7 +142,7 @@ footer.footer-post li:last-child:after {
   top: -15px;
   left: 480px;
   height: 6px;
-  width: 0px;
+  width: 300px;
 }
 #indicators .indicator{
   height: 100%;
