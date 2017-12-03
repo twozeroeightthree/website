@@ -42,7 +42,7 @@ function updateBlocks(){
   }
   else if (m<n) {
     for (var i=0;i<m-n;i+=1){
-      $("#indicators").append("<div class="indicator"></div>");
+      $("#indicators").append('<div class="indicator"></div>');
     }
   }
 }
