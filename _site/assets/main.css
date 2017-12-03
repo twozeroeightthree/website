@@ -113,6 +113,15 @@ footer.footer-post li:last-child:after {
   top:-250px;
 }
 
+#nextbutton {
+  background-image: image("/assets/next.svg");
+  width: 100px;
+  height: 200px;
+  position: fixed;
+  top:0px;
+  right:0px;
+}
+
 /* Post styles */
 
 .panel.post h2, .panel.post h3{

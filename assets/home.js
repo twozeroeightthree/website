@@ -19,13 +19,11 @@ function hide(){
   },t);
 }
 
-
 function goto(n){
   if (n>elements-1){
     n=0;
   }
   var pos = $("#slideshow .element").eq(n).position().left;
-  console.log(pos);
   $("#slideshow").animate({
     scrollLeft: $("#slideshow").scrollLeft()+pos
   }, t);
