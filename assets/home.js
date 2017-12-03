@@ -15,21 +15,8 @@ function onstart(){
   $("#nextbar").on("click",function(){
     next();
   });
-  startBlocks();
 }
-function startBlocks(){
-  var futureDelta =  Math.floor($("#slideshow").width()/($(".element").first().width()+10));
-  var n = Math.ceil(elements/futureDelta);
-  $("#indicators .indicator").remove();
-    for (var i=0;i<n;i+=1){
-      $("#indicators").append('<div class="indicator"></div>');
-    }
-    $("#indicators .indicator").each(function( index ){
-      $( this ).on("click",function(){
-        gotoBlock(index);
-      });
-    });
-}
+
 $( window ).resize(function() {
   if ($("#description").is(":hidden")){
     $("#slideshow").width($(window).width()-125);
@@ -55,6 +42,7 @@ function updateBlocks(){
         gotoBlock(index);
       });
     });
+    activeBlock();
 }
 function activeBlock(){
   $("#indicators .indicator").removeClass("active");
