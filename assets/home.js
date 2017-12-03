@@ -31,8 +31,8 @@ $( window ).resize(function() {
 });
 
 function updateBlocks(){
-  var n = Math.floor(elements / delta) + 1;
-  
+  var n = Math.ceil(elements / delta);
+
 }
 
 function goto(n){
