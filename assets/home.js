@@ -86,6 +86,7 @@ function goto(n){
   $("#slideshow").animate({
     scrollLeft: $("#slideshow").scrollLeft()+pos
   }, t);
+  update();
 }
 function gotoBlock(n){
   update();
