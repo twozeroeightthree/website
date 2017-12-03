@@ -2,6 +2,7 @@ var t = 1000;
 var index = 0;
 var elements = $("#slideshow .element").length;
 var delta = 2;
+
 $("#slideshow .element").each(function(){
   $(this).on("mouseenter", function(){
     $(this).find(".description").css("visibility","visible");
@@ -29,8 +30,9 @@ $( window ).resize(function() {
   $("#slideshow").width($(window).width()-125);
 });
 
-function gotoblock(n){
-
+function updateBlocks(){
+  var n = Math.floor(elements / delta) + 1;
+  
 }
 
 function goto(n){
