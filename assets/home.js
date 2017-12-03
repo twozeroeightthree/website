@@ -28,6 +28,11 @@ function goto(n){
 }
 
 function next(){
-  index+=2;
-  goto(index);
+  if ($("#description").is(":visible")){
+    hide();
+  }
+  else{
+    index+=2;
+    goto(index);
+  }
 }
