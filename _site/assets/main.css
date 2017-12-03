@@ -115,6 +115,7 @@ footer.footer-post li:last-child:after {
   top:-250px;
   object-fit: cover;
 }
+
 #nextbar{
   position: fixed;
   top:27px;
@@ -135,6 +136,13 @@ footer.footer-post li:last-child:after {
   height: 80px;
   background-image: url("/assets/next.svg");
   background-size: cover;
+}
+
+#indicators {
+  height: 10px;
+  width: 10px;
+  background: black;
+
 }
 
 /* Post styles */
