@@ -60,7 +60,7 @@ function hide(){
     left:"100px",
     width:$(window).width()-125
   },t);
-  setTimeout(update(), t);
+  setTimeout(update(), 2*t);
 }
 
 function goto(n){
