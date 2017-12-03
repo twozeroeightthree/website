@@ -67,7 +67,8 @@ function goto(n){
   $("#slideshow").animate({
     scrollLeft: $("#slideshow").scrollLeft()+pos
   }, t);
-  console.log(index/delta);
+  $("#indicators .indicator").removeClass("active");
+  $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
 }
 function gotoBlock(n){
   update();
