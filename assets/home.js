@@ -52,7 +52,8 @@ function hide(){
   $("#slideshow").animate({
     left:"100px",
     width:$(window).width()-125
-  },t,update());
+  },t);
+  setTimeout(update(), t);
 }
 
 function goto(n){
@@ -93,5 +94,4 @@ function previous(){
     index = elements-1;
   }
 }
-
 onstart();
