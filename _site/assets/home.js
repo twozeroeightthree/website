@@ -1,3 +1,7 @@
+var t = 1000;
+var index = 0;
+var elements = $("#slideshow .element").length;
+
 $("#slideshow .element").each(function(){
   $(this).on("mouseenter", function(){
     $(this).find(".description").css("visibility","visible");
@@ -5,13 +9,11 @@ $("#slideshow .element").each(function(){
     $(this).find(".description").css("visibility","hidden");
   });
 });
-$("#slideshow").css("width", $(window).width()-505+"px")
-$("#nextbutton").fadeIn(100);
+$("#slideshow").css("width", $(window).width()-505+"px");
 
-
-var t = 1000;
-var index = 0;
-var elements = $("#slideshow .element").length;
+$("#nextbutton").animate({
+  opacity: 1
+}, t);
 
 function hide(){
   $("#description").fadeOut(t);
