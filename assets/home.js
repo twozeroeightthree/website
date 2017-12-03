@@ -17,7 +17,7 @@ function hide(){
   },t);
 }
 
-$("#slideshow .element").click(function() {
+$("#slideshow .element").each(function() {
   var index = $( ".element" ).index( this );
   console.log( "That was div index #" + index );
 });
