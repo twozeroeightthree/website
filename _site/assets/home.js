@@ -40,8 +40,14 @@ function updateBlocks(){
     }
     $("#indicators .indicator").each(function( index ){
       $( this ).on("click",function(){
-        gotoBlock(index);
-        activeBlock(index);
+        if($("#description").is(":hidden")){
+          gotoBlock(index);
+          activeBlock(index);
+        }
+        else{
+          hide();
+          updateBlocks();
+        }
       });
     });
     activeBlock();
