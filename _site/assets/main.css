@@ -18,7 +18,7 @@ h3 { font-size: 20px; font-weight: bold;}
 
 .panel{ /* Left panel, description */
   width: 450px;
-  height: 500px;
+  height: 457px;
   position: absolute;
   top: 70px;
   left: 25px;
@@ -36,7 +36,7 @@ h3 { font-size: 20px; font-weight: bold;}
 footer{
   width: 450px;
   position: absolute;
-  top: 585px;
+  top: 540px;
 }
 
 footer h3 {
@@ -89,7 +89,7 @@ footer.footer-post li:last-child:after {
 }
 
 #slideshow .element{
-  display: inline-block; 
+  display: inline-block;
 }
 #slideshow .element .description{
   visibility: hidden;
