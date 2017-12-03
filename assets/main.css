@@ -125,10 +125,11 @@ footer.footer-post li:last-child:after {
 
 #nextbar{
   position: fixed;
-  top:27px;
-  right:5px;
+  top: 230px;
+  right: 5px;
+  margin-top: -75px;
   width: 90px;
-  height: 460px;
+  height: 150px;
 }
 #nextbar:hover{ cursor: pointer;}
 
