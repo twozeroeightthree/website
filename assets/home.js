@@ -34,17 +34,10 @@ $( window ).resize(function() {
 
 function updateBlocks(){
   var n = Math.ceil(elements / delta);
-  var m = $("#indicators .indicator").length;
-  if (m<n){
-    for (var i=0;i<m-n;i+=1){
-      $("#indicators .indicator").last().remove();
-    }
-  }
-  else if (m>n) {
-    for (var i=0;i<m-n;i+=1){
+  $("#indicators .indicator").remove();
+    for (var i=0;i<n;i+=1){
       $("#indicators").append('<div class="indicator"></div>');
     }
-  }
 }
 
 function goto(n){
