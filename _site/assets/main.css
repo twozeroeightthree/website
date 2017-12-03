@@ -1,7 +1,7 @@
 /* General styles */
 @font-face {
-    font-family: DIN;
-    src: url("/assets/DIN-Medium.ttf");
+  font-family: DIN;
+  src: url("/assets/DIN-Medium.ttf");
 }
 
 body{
