@@ -23,7 +23,7 @@ function hide(){
   },t);
 }
 $( window ).resize(function() {
-  $("#slideshow").width(width:$(window).width()-125);
+  $("#slideshow").width($(window).width()-125);
 });
 
 
