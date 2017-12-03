@@ -114,7 +114,6 @@ footer.footer-post li:last-child:after {
 }
 
 #nextbutton {
-  visibility: hidden;
   background-image: url("/assets/next.svg");
   background-size: cover;
   width: 50px;
@@ -122,6 +121,7 @@ footer.footer-post li:last-child:after {
   position: fixed;
   top:0px;
   right:0px;
+  opacity: 0;
 }
 
 /* Post styles */
