@@ -37,11 +37,12 @@ function goto(n){
 }
 
 function next(){
+  var delta = Math.floor($("#slideshow").width()/($(".element").first().width()+10));
   if ($("#description").is(":visible")){
     hide();
   }
   else {
-    index += 2;
+    index += delta;
     goto(index);
   }
   if (index > elements-1){
@@ -50,7 +51,8 @@ function next(){
 }
 
 function previous(){
-  index -= 2;
+  var delta = Math.floor($("#slideshow").width()/($(".element").first().width()+10));
+  index -= delta;
   goto(index);
   if (index < 0){
     index = elements-1;
