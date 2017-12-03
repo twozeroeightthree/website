@@ -28,10 +28,13 @@ function hide(){
     width:$(window).width()-125
   },t);
 }
+
 $( window ).resize(function() {
-  $("#slideshow").width($(window).width()-125);
-  updateDelta();
-  updateBlocks();
+  if ($("#description").is(":visible")){
+    $("#slideshow").width($(window).width()-125);
+    updateDelta();
+    updateBlocks();
+  }
 });
 
 function updateBlocks(){
@@ -85,5 +88,3 @@ function previous(){
     index = elements-1;
   }
 }
-updateDelta();
-updateBlocks();
