@@ -30,7 +30,7 @@ function hide(){
 }
 
 $( window ).resize(function() {
-  if ($("#description").is(":visible")){
+  if ($("#description").is(":hidden")){
     $("#slideshow").width($(window).width()-125);
     updateDelta();
     updateBlocks();
