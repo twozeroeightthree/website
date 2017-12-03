@@ -34,7 +34,7 @@ $( window ).resize(function() {
 
 function updateBlocks(){
   var n = Math.ceil(elements / delta);
-  $("#indicators .indicator").remove();
+  $("#indicators .indicator").last().remove();
   for (i = 0; i<n;i+=1){
 
   }
