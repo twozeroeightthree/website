@@ -77,7 +77,7 @@ footer.footer-post li:last-child:after {
 
 /* Home styles */
 
-.panel.home p{
+.panel .home p{
   font-size: 20px;
   line-height: 1.2em;
   word-spacing: 1px;
