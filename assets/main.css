@@ -115,6 +115,7 @@ footer.footer-post li:last-child:after {
 
 #nextbutton {
   background-image: image("/assets/next.svg");
+  background-size: contain;
   width: 100px;
   height: 200px;
   position: fixed;
