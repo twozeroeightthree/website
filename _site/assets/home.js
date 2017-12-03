@@ -66,6 +66,7 @@ function hide(){
     left:"100px",
     width:$(window).width()-125
   },t);
+  return "ok";
 }
 
 function goto(n){
@@ -87,8 +88,9 @@ function gotoBlock(n){
 
 function next(){
   if ($("#description").is(":visible")){
-    hide();
-    update();
+    if(hide()=="ok"){
+      update();
+    }
   }
   else {
     updateDelta();
