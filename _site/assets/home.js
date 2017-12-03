@@ -20,6 +20,8 @@ function updateDelta(){
 }
 
 function hide(){
+  updateDelta();
+  updateBlocks();
   $("#description").fadeOut(t);
   $("#slideshow").animate({
     left:"100px",
