@@ -40,15 +40,20 @@ function updateBlocks(){
     $("#indicators .indicator").each(function( index ){
       $( this ).on("click",function(){
         gotoBlock(index);
-        activeBlock();
+        activeBlock(index);
       });
     });
     activeBlock();
     console.log("aaa");
 }
-function activeBlock(){
+function activeBlock(n=-1){
   $("#indicators .indicator").removeClass("active");
-  $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
+  if (n>=0){
+    $("#indicators .indicator").eq(Math.floor(n)).addClass("active");
+  }
+  else{
+    $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
+  }
 }
 function update(){
   updateDelta();
