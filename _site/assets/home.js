@@ -21,11 +21,11 @@ function onstart(){
 $( window ).resize(function() {
   if ($("#description").is(":hidden")){
     $("#slideshow").width($(window).width()-125);
-    update();
   }
   else{
     $("#slideshow").css("width", $(window).width()-505+"px");
   }
+  update();
 });
 
 
