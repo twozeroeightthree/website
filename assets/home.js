@@ -39,6 +39,9 @@ function updateBlocks(){
       $("#indicators").append('<div class="indicator"></div>');
     }
 }
+function gotoBlock(n){
+  goto(n*delta);
+}
 
 function goto(n){
   if (n>elements-1){
