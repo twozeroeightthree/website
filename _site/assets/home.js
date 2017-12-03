@@ -86,7 +86,6 @@ function goto(n){
   $("#slideshow").animate({
     scrollLeft: $("#slideshow").scrollLeft()+pos
   }, t);
-  update();
 }
 function gotoBlock(n){
   update();
@@ -105,6 +104,7 @@ function next(){
   if (index > elements-1){
     index = 0;
   }
+  activeBlock();
 }
 function previous(){
   updateDelta();
@@ -113,5 +113,6 @@ function previous(){
   if (index < 0){
     index = elements-1;
   }
+  activeBlock();
 }
 onstart();
