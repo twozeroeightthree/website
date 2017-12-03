@@ -11,7 +11,7 @@ $("#slideshow .element").each(function(){
 });
 $("#slideshow").css("width", $(window).width()-505+"px");
 
-$("#nextbutton").opacity(1);
+$("#nextbutton").css("opacity",1);
 
 function hide(){
   $("#description").fadeOut(t);
