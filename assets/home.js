@@ -10,6 +10,10 @@ $("#slideshow .element").each(function(){
   });
 });
 $("#slideshow").css("width", $(window).width()-505+"px");
+$("#nextbar").on("click",function(){
+  next();
+});
+
 
 function hide(){
   $("#description").fadeOut(t);
