@@ -119,6 +119,7 @@ footer.footer-post li:last-child:after {
   width: 90px;
   height: 500px;
 }
+#nextbar:hover{ cursor: pointer;}
 
 #nextbutton {
   position: relative;
