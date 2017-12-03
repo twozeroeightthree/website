@@ -85,6 +85,7 @@ function next(){
   if (index > elements-1){
     index = 0;
   }
+  console.log(index/delta);
 }
 function previous(){
   updateDelta();
