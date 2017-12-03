@@ -141,9 +141,13 @@ footer.footer-post li:last-child:after {
   position: relative;
   top: -15px;
   left: 480px;
-  height: 10px;
+  height: 6px;
   width: auto;
-  background: black;
+}
+#indicators .indicator{
+  height: 100%;
+  width: 10px;
+  background: #555;
 }
 
 /* Post styles */
