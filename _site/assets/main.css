@@ -111,7 +111,7 @@ footer.footer-post li:last-child:after {
 #slideshow .element img{
   height: 500px;
   position: relative;
-  top:-225px;
+  top:-250px;
 }
 #nextbar{
   position: fixed;
