@@ -28,11 +28,16 @@ function hide(){
 }
 $( window ).resize(function() {
   $("#slideshow").width($(window).width()-125);
+  updateDelta();
+  updateBlocks();
 });
 
 function updateBlocks(){
   var n = Math.ceil(elements / delta);
-  return n;
+  $("#indicators .indicator").remove();
+  for (i = 0; i<n;i+=1){
+
+  }
 }
 
 function goto(n){
