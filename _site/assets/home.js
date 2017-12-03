@@ -47,6 +47,8 @@ function updateBlocks(){
         else{
           hide();
           updateBlocks();
+          gotoBlock(index);
+          activeBlock(index);
         }
       });
     });
