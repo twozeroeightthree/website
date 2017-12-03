@@ -41,6 +41,7 @@ function updateBlocks(){
       gotoBlock(index);
     });
   });
+  activeBlock();
 }
 function update(){
   updateDelta();
@@ -67,13 +68,14 @@ function goto(n){
   $("#slideshow").animate({
     scrollLeft: $("#slideshow").scrollLeft()+pos
   }, t);
-  $("#indicators .indicator").removeClass("active");
-  console.log(Math.floor(index/delta));
-  $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
 }
 function gotoBlock(n){
   update();
   goto(n*delta);
+}
+function activeBlock(){
+  $("#indicators .indicator").removeClass("active");
+  $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
 }
 
 function next(){
