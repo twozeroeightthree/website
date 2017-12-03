@@ -151,6 +151,8 @@ footer.footer-post li:last-child:after {
   display: inline-block;
   margin-right: 5px;
 }
+#indicators .indicator:hover{ cursor: pointer;}
+
 #indicators .indicator.active{
   background: #555;
 }
