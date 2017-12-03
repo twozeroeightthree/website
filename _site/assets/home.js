@@ -38,6 +38,11 @@ function updateBlocks(){
     for (var i=0;i<n;i+=1){
       $("#indicators").append('<div class="indicator"></div>');
     }
+  $("#indicators .indicator").each(function( index ){
+    $( this ).on("click",function(){
+      gotoBlock(index);
+    });
+  });
 }
 function gotoBlock(n){
   goto(n*delta);
