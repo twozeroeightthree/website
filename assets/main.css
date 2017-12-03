@@ -17,7 +17,7 @@ h1 { font-size: 30px; font-weight: bold;}
 h2 { font-size: 24px; font-weight: bold;}
 h3 { font-size: 20px; font-weight: bold;}
 
-#title a{ text-decoration:none; font-size: 38px; }
+#title a{ text-decoration:none; font-size: 33px; }
 
 /* Structure of the website */
 
@@ -31,7 +31,7 @@ h3 { font-size: 20px; font-weight: bold;}
 
 .media{ /* Right section, media and content */
   position: relative;
-  top: -38px;             /* TO BE CHANGED  */
+  top: -33px;             /* TO BE CHANGED  */
   left: 480px;
   display: inline-block;
 }
