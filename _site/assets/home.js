@@ -22,6 +22,10 @@ function hide(){
     width:$(window).width()-125
   },t);
 }
+$( window ).resize(function() {
+  $("#slideshow").width(width:$(window).width()-125);
+});
+
 
 function goto(n){
   if (n>elements-1){
