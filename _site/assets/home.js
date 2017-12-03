@@ -39,4 +39,7 @@ function next(){
     index+=2;
     goto(index);
   }
+  if (index > elements-1){
+    index=0;
+  }
 }
