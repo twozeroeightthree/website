@@ -17,7 +17,10 @@ function hide(){
   },t);
 }
 
-$("#slideshow .element").each(function() {
-  var index = $( ".element" ).index( this );
-  console.log( "That was div index #" + index );
-});
+
+function goto(n){
+  var pos = $("#slideshow .element").eq(n).position().left;
+  $("#slideshow").animate({
+    scrollLeft: pos
+  }, t);
+}
