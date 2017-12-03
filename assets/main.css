@@ -89,7 +89,7 @@ footer.footer-post li:last-child:after {
 }
 
 #slideshow .element{
-  display: inline-block;
+  display: inline-block; 
 }
 #slideshow .element .description{
   visibility: hidden;
