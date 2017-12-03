@@ -27,9 +27,7 @@ function hide(){
   },t);
 }
 $( window ).resize(function() {
-  if ($("#description").is(":hidden")){
-    $("#slideshow").width($(window).width()-125);
-  }
+  $("#slideshow").width($(window).width()-125);
   updateDelta();
   updateBlocks();
 });
