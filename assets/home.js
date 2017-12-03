@@ -83,6 +83,7 @@ function gotoBlock(n){
 function next(){
   if ($("#description").is(":visible")){
     hide();
+    update();
   }
   else {
     updateDelta();
