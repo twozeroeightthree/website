@@ -124,9 +124,9 @@ footer.footer-post li:last-child:after {
 #nextbutton {
   position: relative;
   top: 50%;
-  right: 50%;
+  left: 50%;
   margin-top: -50px;
-  margin-right: -25px;
+  margin-left: -25px;
 
   width: 50px;
   height: 100px;
