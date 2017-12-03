@@ -74,7 +74,7 @@ function gotoBlock(n){
 }
 
 function next(){
-  update();
+  updateDelta();
   if ($("#description").is(":visible")){
     hide();
   }
@@ -87,7 +87,6 @@ function next(){
   }
 }
 function previous(){
-  update();
   index -= delta;
   goto(index);
   if (index < 0){
