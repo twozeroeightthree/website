@@ -32,7 +32,7 @@ $( window ).resize(function() {
 
 function updateBlocks(){
   var n = Math.ceil(elements / delta);
-
+  return n;
 }
 
 function goto(n){
