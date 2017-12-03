@@ -44,7 +44,7 @@ function updateBlocks(){
       });
     });
     activeBlock();
-    console.log("aaa");
+    console.log(delta);
 }
 function activeBlock(n=-1){
   $("#indicators .indicator").removeClass("active");
