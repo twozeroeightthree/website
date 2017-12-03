@@ -40,6 +40,7 @@ function updateBlocks(){
     $("#indicators .indicator").each(function( index ){
       $( this ).on("click",function(){
         gotoBlock(index);
+        activeBlock();
       });
     });
     activeBlock();
@@ -52,7 +53,6 @@ function activeBlock(){
 function update(){
   updateDelta();
   updateBlocks();
-  activeBlock();
 }
 
 function hide(){
