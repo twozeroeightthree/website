@@ -19,7 +19,7 @@ function hide(){
 
 
 function goto(n){
-  var pos = $("#slideshow .element").eq(n).position().left;
+  var pos = $("#slideshow .element").eq(n).offset().left;
   $("#slideshow").animate({
     scrollLeft: pos
   }, t);
