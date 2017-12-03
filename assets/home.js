@@ -1,7 +1,7 @@
 var t = 1000;
 var index = 0;
 var elements = $("#slideshow .element").length;
-var delta = 2;
+var delta = 0;
 
 function onstart(){
   $("#slideshow .element").each(function(){
