@@ -83,6 +83,7 @@ footer.footer-post li:last-child:after {
 }
 
 #slideshow {
+  height: 450px;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -104,20 +105,20 @@ footer.footer-post li:last-child:after {
 }
 #slideshow .element a:hover{
   text-decoration: none;
-  height: 500px;
+  height: 450px;
 }
 
 #slideshow .element img{
-  height: 500px;
+  height: 450px;
   position: relative;
-  top:-250px;
+  top:-225px;
 }
 #nextbar{
   position: fixed;
   top:27px;
   right:5px;
   width: 90px;
-  height: 500px;
+  height: 450px;
 }
 #nextbar:hover{ cursor: pointer;}
 
