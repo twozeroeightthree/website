@@ -38,13 +38,6 @@ function updateBlocks(){
   var m = $("#indicators .indicator").length;
 
   $("#indicators .indicator").last().remove();
-
-  for (let i = 0; i<n-m;i+=1){
-
-  }
-  for (let i = 0; i<n;i+=1){
-
-  }
 }
 
 function goto(n){
@@ -82,3 +75,5 @@ function previous(){
     index = elements-1;
   }
 }
+updateDelta();
+updateBlocks();
