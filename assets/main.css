@@ -31,7 +31,7 @@ h3 { font-size: 20px; font-weight: bold;}
 
 .media{ /* Right section, media and content */
   position: relative;
-  top: -28px;             /* TO BE CHANGED  */
+  top: -38px;             /* TO BE CHANGED  */
   left: 480px;
   display: inline-block;
 }
