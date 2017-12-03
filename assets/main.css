@@ -131,7 +131,6 @@ footer.footer-post li:last-child:after {
   left: 50%;
   margin-top: -40px;
   margin-left: -10px;
-
   width: 40px;
   height: 80px;
   background-image: url("/assets/next.svg");
@@ -139,10 +138,12 @@ footer.footer-post li:last-child:after {
 }
 
 #indicators {
+  position: relative;
+  top: -15px;
+  left: 480px;
   height: 10px;
-  width: 10px;
+  width: auto;
   background: black;
-
 }
 
 /* Post styles */
