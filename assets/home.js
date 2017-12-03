@@ -39,16 +39,10 @@ function updateBlocks(){
       $("#indicators").append('<div class="indicator"></div>');
     }
     $("#indicators .indicator").each(function( index ){
-      if ($("#description").is(":hidden")){
-        $( this ).on("click",function(){
-          gotoBlock(index);
-          activeBlock(index);
-        });
-      }else{
-        $( this ).on("click",function(){
-          hide();
-        });
-      }
+      $( this ).on("click",function(){
+        gotoBlock(index);
+        activeBlock(index);
+      });
     });
     activeBlock();
     console.log(delta);
