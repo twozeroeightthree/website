@@ -15,8 +15,7 @@ function onstart(){
   $("#nextbar").on("click",function(){
     next();
   });
-
-
+  startBlocks();
 }
 function startBlocks(){
   var futureDelta =  Math.floor($("#slideshow").width()/($(".element").first().width()+10));
