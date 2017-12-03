@@ -122,14 +122,15 @@ footer.footer-post li:last-child:after {
 }
 
 #nextbutton {
+  position: relative;
+  top:calc(50% - 50px);
+  right:0px;
+  opacity: 0;
+
   background-image: url("/assets/next.svg");
   background-size: cover;
   width: 50px;
   height: 100px;
-  position: fixed;
-  top:0px;
-  right:0px;
-  opacity: 0;
 }
 
 /* Post styles */
