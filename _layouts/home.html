@@ -15,13 +15,13 @@ layout: default
   </p>
 </div>
 <div id="slideshow" class="media home">
-  {% for link in site.data.home.main %}
+  {% for post in site.posts %}
   <div class="element">
     <a href="{{ link.url }}">
       <div class="description">
-        {{link.title}}
+        {{ post.title }}
       </div>
-      <img src="{{ link.img }}">
+      {% include get_first_image.html path=post.imgpath %}
     </a>
   </div>
   {% endfor %}
