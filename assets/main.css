@@ -195,3 +195,7 @@ footer.footer-post li:last-child:after {
   margin-right: 100px;
 }
 */
+
+footer.footer-post{
+  position: fixed;
+}
