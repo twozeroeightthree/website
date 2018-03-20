@@ -1,0 +1,38 @@
+---
+layout: default
+---
+<div id="description" class="panel home">
+  <p>
+    A showcase for contemporary art <br>
+    pieces located somewhere <br>
+    between art and design. <br>
+    Informed by a simple impulse or <br>
+    thought and influenced by <br>
+    process and circumstance, the <br>
+    work attempts to present the <br>
+    qualities inherent in an object or <br>
+    material.
+  </p>
+</div>
+<div id="slideshow" class="media home">
+  {% for link in site.data.home.main %}
+  <div class="element">
+    <a href="{{ link.url }}">
+      <div class="description">
+        {{link.title}}
+      </div>
+      <img src="{{ link.img }}">
+    </a>
+  </div>
+  {% endfor %}
+  <div id="nextbar">
+    <div id="nextbutton"></div>
+  </div>
+  <div id="prevtbar">
+    <div id="prevbutton"></div>
+  </div>
+</div>
+<div id="indicators">
+</div>
+{%include footer.html%}
+<script src="/assets/home.js"></script>
