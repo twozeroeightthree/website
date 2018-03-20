@@ -167,7 +167,7 @@ footer.footer-post li:last-child:after {
 }
 
 /* Post styles */
-#title.home{ position: fixed; }
+#title.post{ position: fixed; }
 
 .panel.post{
   position: fixed;
