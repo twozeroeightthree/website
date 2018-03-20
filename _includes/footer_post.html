@@ -5,11 +5,9 @@
     © Brendan McCormick - all rights reserved 2017
   </h3>
   <ul>
-    <li>List of project names</li>
-  {% for post in site.posts %}
+    <li>List of project names</li>{% for post in site.posts %}
     <li>
       <a href="{{ post.url | relative_url}}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
+    </li>{% endfor %}
 </ul>
 </footer>

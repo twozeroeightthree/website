@@ -21,8 +21,7 @@ layout: default
       <div class="description">
         {{ post.title }}
       </div>
-      {% include get_first_image.html path=post.imgpath %}
-    </a>
+    {% include get_first_image.html path=post.imgpath %}</a>
   </div>
   {% endfor %}
   <div id="nextbar">
