@@ -1,0 +1,7 @@
+<div class="media post">
+  {% for image in site.static_files %}
+    {% if image.path contains page.imgpath %}
+      <img src="{{ image.path | absolute_url}}" alt="image" />
+    {% endif %}
+  {% endfor %}
+</div>
