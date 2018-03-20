@@ -11,4 +11,4 @@ permalink: /:title/
 paginate_path: /projects/:num/
 paginate: 5
 
-exclude: [ref.pdf, size-ref.png, README.md, CNAME, compile.sh, _posts/2000-01-01-template.html]
+exclude: [ref.pdf, size-ref.png, README.md, notes.md, CNAME, compile.sh, _posts/2000-01-01-template.html]
