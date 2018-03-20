@@ -21,7 +21,7 @@ imgpath: /img/rolls/
 </div>
 <div class="media post">
   {% for image in site.static_files %}
-    {% if image.path contains imgpath %}
+    {% if image.path contains '/img/rolls/' %}
       <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
     {% endif %}
   {% endfor %}
