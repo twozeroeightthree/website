@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 72 rolls _ 32 balls
-imgpath: /img/rolls/
+imgpath: "/img/rolls/"
 ---
 <div id="description" class="panel">
 <h2></h2>
@@ -21,7 +21,7 @@ imgpath: /img/rolls/
 </div>
 <div class="media post">
   {% for image in site.static_files %}
-    {% if image.path contains {{ imgpath }} %}
+    {% if image.path contains imgpath %}
       <img src="{{ image.path | absolute_url}}" alt="image" />
     {% endif %}
   {% endfor %}
