@@ -183,6 +183,7 @@ footer.footer-post li:last-child:after {
   height: 460px;
   margin-right: 10px;
   margin-bottom: 10px;
+  display: block;
 }
 /*
 .media.post img:nth-child(2n){
