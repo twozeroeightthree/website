@@ -2,6 +2,12 @@
 @font-face {
   font-family: DIN;
   src: url("/assets/DIN-Medium.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: DIN;
+  src: url("/assets/DIN-Light.ttf");
+  font-weight: lighter;
 }
 
 body{
@@ -170,7 +176,7 @@ footer.footer-post li:last-child:after {
 
 .panel.post h2, .panel.post h3{
   color: rgb(150, 150, 150);
-  font-weight: normal;
+  font-weight: lighter;
 }
 .panel.post h2 { margin-bottom: 0.5em;}
 .panel.post h3 { margin-bottom: 1em;}
