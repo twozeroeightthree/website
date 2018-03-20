@@ -1,8 +1,5 @@
 </div>
 <div class="media post">
-  {% for image in site.static_files %}
-    {% if image.path contains include.path %}
-      <img src="{{ image.path | absolute_url}}" alt="image" />
-    {% endif %}
-  {% endfor %}
+{% for image in site.static_files %}{% if image.path contains include.path %}     <img src="{{ image.path | absolute_url}}" alt="image" />
+{% endif %}{% endfor %}
 </div>
