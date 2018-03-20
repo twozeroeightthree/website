@@ -181,6 +181,7 @@ footer.footer-post li:last-child:after {
 .media.post img{
   width: 370px;
   height: 460px;
+  margin-right: 10px;
 }
 /*
 .media.post img:nth-child(2n){
