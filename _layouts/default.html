@@ -2,7 +2,7 @@
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
   {% include head.html %}
   <body>
-    <h1 id="title"><a href="/">2083</a></h1>
+    <h1 id="title" {% if {{ page.is_post }} %} class="post" {% endif %}><a href="/">2083</a></h1>
     {{ content }}
   </body>
 
