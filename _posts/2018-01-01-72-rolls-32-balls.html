@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 72 rolls _ 32 balls
+imgpath: /img/rolls/
 ---
 <div id="description" class="panel">
 <h2></h2>
@@ -19,5 +20,9 @@ title: 72 rolls _ 32 balls
 <span>+ info upon request</span>
 </div>
 <div class="media post">
-        images
+  {% for image in site.static_files %}
+    {% if image.path contains imgpath %}
+      <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
+    {% endif %}
+  {% endfor %}
 </div>
