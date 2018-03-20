@@ -3,11 +3,6 @@
   font-family: DIN;
   src: url("/assets/DIN-Medium.ttf");
 }
-@font-face {
-  font-family: DIN;
-  src: url("/assets/DIN-Light.ttf");
-  font-weight: lighter;
-}
 
 body{
   padding: 25px;
