@@ -20,7 +20,7 @@ h3 { font-size: 20px; font-weight: bold;}
 #title a{ text-decoration:none; font-size: 33px; }
 
 /* Structure of the website */
-#title { position: fixed;}
+
 .panel{ /* Left panel, description */
   width: 450px;
   height: 457px;
@@ -40,7 +40,7 @@ h3 { font-size: 20px; font-weight: bold;}
 
 footer{
   width: 450px;
-  position: fixed;
+  position: absolute;
   top: 500px;
 }
 
@@ -171,7 +171,6 @@ footer.footer-post li:last-child:after {
 .panel.post h2, .panel.post h3{
   color: rgb(150, 150, 150);
   font-weight: normal;
-  position: fixed;
 }
 
 
