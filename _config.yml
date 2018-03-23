@@ -2,7 +2,7 @@ title: "2083"
 author: "Brendan McCormick"
 description: "A showcase for contemporary art pieces located somewhere between art and design. Informed by a simple impulse or thought and influenced by process and circumstance, the work attempts to present the qualities inherent in an object or material."
 baseurl: "/"
-url: "http://twozeroeightthree.com/"
+url: "http://twozeroeightthree.com"
 lang: en
 
 plugins: [jekyll-paginate, jekyll-sitemap, jekyll-seo-tag]
