@@ -9,8 +9,9 @@
 }
 *{
   text-rendering:optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  /*-webkit-font-smoothing: antialiased;*/
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-stroke: 0.1px;
 }
 body{
   padding: 25px;
@@ -54,20 +55,25 @@ footer{
 }
 
 footer h3 {
-  font-size: 11px;
+  font-size: 12px;
   font-family: DINlight;
-  margin-bottom: 25px;
+  color: rgb(170, 170, 170);
 }
 
 footer h3 a{
-  font-size: 16px;
   text-decoration: none;
 }
 
+footer.footer-post ul{
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 footer.footer-post ul, footer.footer-post ul a{
-  color: rgb(175, 175, 175);
+  color: rgb(135, 135, 135);
   text-decoration: none;
   font-size: 12px;
+  line-height: 1.5em;
 }
 footer.footer-post ul a:hover{
   color:black;
@@ -88,24 +94,33 @@ footer.footer-post li:last-child:after {
 /* Home styles */
 
 .panel.home p{
-  font-size: 28px;
   line-height: 1.2em;
   word-spacing: 1px;
   color: rgb(150, 150, 150);
   -webkit-transition: width 2s, height 4s; /* For Safari 3.1 to 6.0 */
   transition: width 2s, height 4s;
-
+  margin-bottom: 1em;
+}
+.panel.home p:first-child{
+  font-size: 25px;
+}
+.panel.home p:nth-child(2){
+  font-size: 20px;
+  font-family: DIN-Light;
 }
 
 #slideshow {
   height: 460px;
   white-space: nowrap;
   overflow: hidden;
+  font-size: 0px;
 }
 
 #slideshow .element{
   display: inline-block;
+  clear: both;
   height: 460px;
+  margin-right: 10px;
 }
 #slideshow .element .description{
   visibility: hidden;
@@ -127,7 +142,7 @@ footer.footer-post li:last-child:after {
 
 #slideshow .element img{
   height: 460px;
-  width: 370px;
+  width: 345px;
   position: relative;
   top: -230px;
   object-fit: cover;
@@ -191,19 +206,24 @@ footer.footer-post li:last-child:after {
 .panel.post h2 { margin-bottom: 0.5em;}
 .panel.post h3 { margin-bottom: 1em;}
 .panel.post p {
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.3em;
   margin-bottom: 1em;
 }
+.panel.post span {
+  font-size: 14px;
+  margin-bottom: 1em;
+  color: rgb(157, 157, 157);
+}
 .media.post{
+  width: 700px;
   top: 0;
   display: grid;
   grid-gap: 10px;
-  width: calc(100% - 500px);
 }
 
 .media.post img{
-  width: 370px;
-  height: 460px;
+  width: 345px;
   margin-right: 0px;
   margin-bottom: 0px;
 }
@@ -219,9 +239,10 @@ footer.footer-post{
   position: fixed;
 }
 
-
-
-@media only screen and (max-width: 1255px) {
+@media only screen and (max-width: 1220px) {
+  .media.post{
+    width: 370px;
+  }
   .media.post img:nth-child(2){
     grid-area: auto;
   }
