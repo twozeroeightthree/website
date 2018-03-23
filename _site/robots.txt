@@ -1,1 +1,1 @@
-Sitemap: /sitemap.xml
+Sitemap: http://twozeroeightthree.com/sitemap.xml
