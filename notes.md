@@ -15,3 +15,6 @@
 # Questions
 - 72 rolls 32 balls project: +info... ¿link?
 - Tops: images?
+- Favicom
+- Ipad show more
+- 

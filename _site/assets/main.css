@@ -212,7 +212,7 @@ footer.footer-post li:last-child:after {
 .panel.post p {
   font-size: 18px;
   line-height: 1.3em;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 .panel.post span {
   font-size: 14px;
