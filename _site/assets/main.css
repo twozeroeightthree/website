@@ -265,3 +265,6 @@ footer.footer-post{
     position: absolute;
     bottom: 10px;
 }
+  #indicators .indicator.mobile{
+    visibility: hidden !important;
+  }
