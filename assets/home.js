@@ -1,4 +1,4 @@
-var t = 1000;
+var t;
 var index = 0;
 var elements = $("#slideshow .element").length;
 var delta = Math.floor(($(window).width()-125)/($(".element").first().width()+10));
@@ -10,12 +10,16 @@ function onstart(){
     }).on("mouseleave", function(){
       $(this).find(".description").css("visibility","hidden");
     });
+    $("#slideshow").append($(this).clone());
   });
   $("#slideshow").css("width", $(window).width()-505+"px");
   $("#nextbar").on("click",function(){
     next();
   });
   updateBlocks();
+  t = 0;
+  goto(0);
+  t = 1000;
 }
 
 $( window ).resize(function() {
@@ -38,22 +42,21 @@ function updateBlocks(){
     for (var i=0;i<n;i+=1){
       $("#indicators").append('<div class="indicator"></div>');
     }
-    $("#indicators .indicator").each(function( index ){
+    $("#indicators .indicator").each(function( i ){
       $( this ).on("click",function(){
         if($("#description").is(":hidden")){
-          gotoBlock(index);
-          activeBlock(index);
+          gotoBlock(i);
+          activeBlock(i);
         }
         else{
           hide();
           updateBlocks();
-          gotoBlock(index);
-          activeBlock(index);
+          gotoBlock(i);
+          activeBlock(i);
         }
       });
     });
     activeBlock();
-    console.log(delta);
 }
 function activeBlock(n=-1){
   $("#indicators .indicator").removeClass("active");

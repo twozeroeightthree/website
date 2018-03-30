@@ -13,7 +13,5 @@
 - responsive
 
 # Questions
-- Changed image order on cone project to match carrousel
 - 72 rolls 32 balls project: +info... ¿link?
 - Tops: images?
-- mail?
