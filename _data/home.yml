@@ -1,25 +1,25 @@
 main:
-  - title: "Sheikh Zayed Road _ E11<br>Tire Fragments"
-    url: /Sheikh-Zayed-Road-E11/
-    img: /assets/img/home/home01.jpg
-  - title: "Test"
-    url: /test/
-    img: /assets/img/home/home02.jpg
-  - title: "Test"
-    url: /test/
-    img: /assets/img/home/home03.jpg
-  - title: "Test"
-    url: /test/
-    img: /assets/img/home/home04.jpg
-  - title: "Test"
-    url: /test/
-    img: /assets/img/home/home05.jpg
-  - title: "Test"
-    url: /test/
-    img: /assets/img/home/home06.jpg
-  - title: "Test"
-    url: /test/
-    img: /assets/img/home/home07.jpg
-  - title: "Test"
-    url: /test/
-    img: /assets/img/home/home08.jpg
+  - title: "Sheikh Zayed Road _ E11<br>Tire fragments "
+    url: /tire-fragments/
+    img: /assets/img/home/tire.jpg
+  - title: "A piece of chalk"
+    url: /a-piece-of-chalk/
+    img: /assets/img/home/chalk.jpg
+  - title: "Tops"
+    url: /tops/
+    img: /assets/img/home/tops.jpg
+  - title: "Packing tape cones"
+    url: /packing-tape-cones/
+    img: /assets/img/home/cone.jpg
+  - title: "Ex-football"
+    url: /ex-football/
+    img: /assets/img/home/ex-football.jpg
+  - title: "Found objects"
+    url: /found-objects/
+    img: /assets/img/home/found_objects.jpg
+  - title: "Posidonias"
+    url: /posidonias/
+    img: /assets/img/home/posidonias.jpg
+  - title: "72 rolls _ 32 balls"
+    url: /72-rolls-32-balls/
+    img: /assets/img/home/rolls.jpg

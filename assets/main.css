@@ -75,6 +75,11 @@ footer.footer-post ul, footer.footer-post ul a{
   font-size: 12px;
   line-height: 1.5em;
 }
+
+footer.footer-post ul a:visited{
+  color: rgb(175, 175, 175);
+}
+
 footer.footer-post ul a:hover{
   color:black;
 }
@@ -106,7 +111,6 @@ footer.footer-post li:last-child:after {
 }
 .panel.home p:nth-child(2){
   font-size: 20px;
-  font-family: DIN-Light;
 }
 
 #slideshow {
