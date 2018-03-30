@@ -30,7 +30,9 @@ h3 { font-size: 20px; font-weight: bold;}
 
 
 /* Structure of the website */
-
+#title{
+  position: fixed;
+}
 .panel{ /* Left panel, description */
   width: 450px;
   height: 457px;
@@ -123,6 +125,7 @@ footer.footer-post li:last-child:after {
   white-space: nowrap;
   overflow: hidden;
   font-size: 0px;
+  top:0px;
 }
 #slideshow.mobile{
   overflow-x: scroll;
