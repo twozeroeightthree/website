@@ -256,15 +256,12 @@ footer.footer-post{
   }
 }
 
-@media (pointer: coarse and hover: none) {
-  #slideshow .element .description::after {
-      content: "Show more";
-      font-size: 14px;
-      display: block;
-      position: absolute;
-      bottom: 10px;
-  }
-  #indicators .indicator{
-    visibility: hidden;
-  }
+/* Mobile */
+
+#slideshow .element .description.mobile::after {
+    content: "Show more";
+    font-size: 14px;
+    display: block;
+    position: absolute;
+    bottom: 10px;
 }
