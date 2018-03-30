@@ -4,22 +4,16 @@
 - 2h: Coding the structure: layout, includes and styles.
 - 1h: Starting to code the css layout.
 - 1,5h: Coding the home carrousel.
-- 2h: Content updating
+- 2h: Content updating.
 > Total: 6h
 
 # to do
 - finish carrousel
-- refine styling
 - responsive
-- Favicom
 - Ipad show more
 - Ipad carrousel
-- carrousel arrow
-- project menu
 - images sizes
 - copyright spacing
-- titles
--
 
 
 # Questions

@@ -4,9 +4,16 @@
   </h3>
   <ul>
     {% for post in site.posts %}
+    {% if page.url == post.url %}
+    <li>
+      <a href="{{ post.url | relative_url}}" class="current" >{{ post.title }}</a>
+    </li>
+    {% else %}
     <li>
       <a href="{{ post.url | relative_url}}">{{ post.title }}</a>
-    </li>{% endfor %}
+    </li>
+    {% endif %}
+    {% endfor %}
   </ul>
     <h3>
     © Brendan McCormick - all rights reserved {{ site.time | date: '%Y' }}
