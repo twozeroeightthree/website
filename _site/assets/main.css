@@ -124,6 +124,9 @@ footer.footer-post li:last-child:after {
   overflow: hidden;
   font-size: 0px;
 }
+#slideshow.mobile{
+  overflow-x: scroll;
+}
 
 #slideshow .element{
   display: inline-block;
