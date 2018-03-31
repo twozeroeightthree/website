@@ -41,9 +41,6 @@ function onstart(){
 if (!small){
   $( window ).resize(function() {
     // The size of #description must match the window size
-    if ($( window ).width()>891){
-      console.log("RELOAD");
-    }
     if ($("#description").is(":hidden")){
       $("#slideshow").width($(window).width()-125);
     }
@@ -158,10 +155,19 @@ if (!small){
     activeBlock();
   }
 }
-$( window ).resize(function() {
-  if ($( window ).width()<890){
-    console.log("RELOAD");
-  }
-});
+
+if (small){
+  $( window ).resize(function() {
+    $("#slideshow .element .description").each(function(){
+      $(this).css("height",($(".element img").first().height()/2));
+    });
+    $("#slideshow .element img").each(function(){
+      $(this).css("top",-($(".element img").first().height()/2));
+    });
+    $("#slideshow .element").each(function(){
+      $(this).css("height",($(".element img").first().height()));
+    });
+  });
+}
 
 onstart();

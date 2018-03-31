@@ -12,7 +12,6 @@
 - responsive
 - images sizes
 - copyright spacing
-- register email
 
 # Questions
 - 72 rolls 32 balls project: +info... ¿link?

@@ -267,7 +267,6 @@ footer.footer-post{
 }
 
 @media only screen and (max-width: 890px) {
-
   .panel{
     position: relative;
     width: auto;
@@ -282,6 +281,28 @@ footer.footer-post{
   }
   .media{
     left: auto;
+  }
+  #slideshow{
+    position: relative;
+    top: auto;
+    width: 100%;
+    height: auto;
+  }
+  #slideshow .element{
+    display: block;
+    position: relative;
+    max-width: 550px;
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  #slideshow .element img{
+    width: 100%;
+    height: auto;
+  }
+  #nextbar, #indicators{
+    display: none;
   }
   .media.post{
     width: auto;
@@ -298,8 +319,10 @@ footer.footer-post{
     max-width: 550px;
   }
 }
-@media only screen and (max-width: 330px){
-
+@media only screen and (max-width: 450px){
+  body{
+    padding: 15px;
+  }
 }
 
 /* Mobile */
