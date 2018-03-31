@@ -13,10 +13,9 @@ var t;
 var index = 0; // Current block position
 var elements = $("#slideshow .element").length; // Total number of elements
 var delta = Math.floor(($(window).width()-125)/($(".element").first().width()+10));
-var small = true;
-if ($(window).width()>890){
-  small = false;
-}
+var r = 890; // Point where the responsive starts
+var big = ($(window).width()>r); // Initial size of the screen
+
 function onstart(){
   $("#slideshow .element").each(function(){
     $(this).on("mouseenter", function(){
@@ -25,7 +24,7 @@ function onstart(){
       $(this).find(".description").css("visibility","hidden");
     });
   });
-  if (!small){
+  if ($(window).width()>r){
   $("#slideshow").css("width", $(window).width()-505+"px");
   $("#nextbar").on("click",function(){
     next();
@@ -37,127 +36,13 @@ function onstart(){
   goto(0);
   t = 1000;
   }
+  responsive();
 }
-if (!small){
-  $( window ).resize(function() {
-    // The size of #description must match the window size
-    if ($("#description").is(":hidden")){
-      $("#slideshow").width($(window).width()-125);
-    }
-    else{
-      $("#slideshow").css("width", $(window).width()-505+"px");
-    }
-    update();
-  });
-  function updateDelta(){
-    // Updates the size of blocks
-    delta = Math.floor(($(window).width()-125)/($(".element").first().width()+10));
-  }
-  function mobileIndex(){
-    return Math.floor($("#slideshow").scrollLeft()/($(".element").first().width()+10))+1;
-  }
-  function updateBlocks(){
-    // Updates the amount of indicators and their click actions
-    var n = Math.ceil(elements / delta);
-    $("#indicators .indicator").remove();
-      for (var i=0;i<n;i+=1){
-        $("#indicators").append('<div class="indicator"></div>');
-      }
-      $("#indicators .indicator").each(function( i ){
-        $( this ).on("click",function(){
-          if($("#description").is(":hidden")){
-            gotoBlock(i);
-            activeBlock(i);
-          }
-          else{
-            hide();
-            updateBlocks();
-            gotoBlock(i);
-            activeBlock(i);
-          }
-        });
-      });
-      activeBlock();
-  }
-  function activeBlock(n=-1){
-    // Highlights the current indicator
-    $("#indicators .indicator").removeClass("active");
-    if (n>=0){
-      $("#indicators .indicator").eq(Math.floor(n)).addClass("active");
-    }
-    else{
-      $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
-    }
-  }
-  function update(){
-    // Updates both delta and blocks (only if desktop)
-    updateDelta();
-    if (!isMobile){
-      updateBlocks();
-    }
-  }
-  function hide(){
-    // First action of arrow or block press: hide the description
-    $("#description").fadeOut(t);
-    $("#slideshow").animate({
-      left:"100px",
-      width:$(window).width()-125
-    },t);
-    if (isMobile){
-      $("#slideshow").addClass("mobile");
-    }
-  }
-  function goto(n){
-    // Here is where the scroll happens
-    if (n>elements-1){
-      n = 0;
-    }
-    else if (n<0) {
-      n = elements-1;
-    }
-    var pos = $("#slideshow .element").eq(n).position().left;
-    $("#slideshow").animate({
-      scrollLeft: $("#slideshow").scrollLeft()+pos
-    }, t);
-  }
-  function gotoBlock(n){
-    // Goes to nth block of delta images
-    update();
-    goto(n*delta);
-    index = n*delta;
-  }
-  function next(){
-    // function toggled on arrow press
-    if ($("#description").is(":visible")){
-      hide();
-      update();
-    }
-    else if(!isMobile){
-      updateDelta();
-      index += delta;
-      goto(index);
-    }
-    else{
-      goto(mobileIndex());
-    }
-    if (index > elements-1){
-      index = 0;
-    }
-    activeBlock();
-  }
-  function previous(){
-    updateDelta();
-    index -= delta;
-    goto(index);
-    if (index < 0){
-      index = elements-1;
-    }
-    activeBlock();
-  }
+function reload(){
+  window.location.reload(false);
 }
-
-if (small){
-  $( window ).resize(function() {
+function responsive(){
+  if ($(window).width() <= r){
     $("#slideshow .element .description").each(function(){
       $(this).css("height",($(".element img").first().height()/2));
     });
@@ -167,7 +52,144 @@ if (small){
     $("#slideshow .element").each(function(){
       $(this).css("height",($(".element img").first().height()));
     });
-  });
+  }
+  else{
+    // The size of #description must match the window size
+    if ($("#description").is(":hidden")){
+      $("#slideshow").width($(window).width()-125);
+    }
+    else{
+      $("#slideshow").css("width", $(window).width()-505+"px");
+    }
+    update();
+  }
+}
+
+$( window ).resize(function() {
+  responsive();
+});
+
+
+window.setInterval(function(){
+  if ($(window).width() <= r){
+    if (big){
+      reload();
+    }
+  }
+  else{
+    if (!big){
+      reload();
+    }
+  }
+  responsive();
+}, 100);
+
+
+
+function updateDelta(){
+  // Updates the size of blocks
+  delta = Math.floor(($(window).width()-125)/($(".element").first().width()+10));
+}
+function mobileIndex(){
+  return Math.floor($("#slideshow").scrollLeft()/($(".element").first().width()+10))+1;
+}
+function updateBlocks(){
+  // Updates the amount of indicators and their click actions
+  var n = Math.ceil(elements / delta);
+  $("#indicators .indicator").remove();
+    for (var i=0;i<n;i+=1){
+      $("#indicators").append('<div class="indicator"></div>');
+    }
+    $("#indicators .indicator").each(function( i ){
+      $( this ).on("click",function(){
+        if($("#description").is(":hidden")){
+          gotoBlock(i);
+          activeBlock(i);
+        }
+        else{
+          hide();
+          updateBlocks();
+          gotoBlock(i);
+          activeBlock(i);
+        }
+      });
+    });
+    activeBlock();
+}
+function activeBlock(n=-1){
+  // Highlights the current indicator
+  $("#indicators .indicator").removeClass("active");
+  if (n>=0){
+    $("#indicators .indicator").eq(Math.floor(n)).addClass("active");
+  }
+  else{
+    $("#indicators .indicator").eq(Math.floor(index/delta)).addClass("active");
+  }
+}
+function update(){
+  // Updates both delta and blocks (only if desktop)
+  updateDelta();
+  if (!isMobile){
+    updateBlocks();
+  }
+}
+function hide(){
+  // First action of arrow or block press: hide the description
+  $("#description").fadeOut(t);
+  $("#slideshow").animate({
+    left:"100px",
+    width:$(window).width()-125
+  },t);
+  if (isMobile){
+    $("#slideshow").addClass("mobile");
+  }
+}
+function goto(n){
+  // Here is where the scroll happens
+  if (n>elements-1){
+    n = 0;
+  }
+  else if (n<0) {
+    n = elements-1;
+  }
+  var pos = $("#slideshow .element").eq(n).position().left;
+  $("#slideshow").animate({
+    scrollLeft: $("#slideshow").scrollLeft()+pos
+  }, t);
+}
+function gotoBlock(n){
+  // Goes to nth block of delta images
+  update();
+  goto(n*delta);
+  index = n*delta;
+}
+function next(){
+  // function toggled on arrow press
+  if ($("#description").is(":visible")){
+    hide();
+    update();
+  }
+  else if(!isMobile){
+    updateDelta();
+    index += delta;
+    goto(index);
+  }
+  else{
+    goto(mobileIndex());
+  }
+  if (index > elements-1){
+    index = 0;
+  }
+  activeBlock();
+}
+function previous(){
+  updateDelta();
+  index -= delta;
+  goto(index);
+  if (index < 0){
+    index = elements-1;
+  }
+  activeBlock();
 }
 
 onstart();
