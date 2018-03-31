@@ -69,7 +69,6 @@ $( window ).resize(function() {
   responsive();
 });
 
-
 window.setInterval(function(){
   if ($(window).width() <= r){
     if (big){
@@ -82,7 +81,7 @@ window.setInterval(function(){
     }
   }
   responsive();
-}, 100);
+}, 50);
 
 
 
