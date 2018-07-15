@@ -130,9 +130,6 @@ footer.footer-post li:last-child:after {
   font-size: 0px;
   top:0px;
 }
-#slideshow.mobile{
-  overflow-x: scroll;
-}
 
 #slideshow .element{
   display: inline-block;
@@ -327,10 +324,22 @@ footer.footer-post{
 
 /* Mobile */
 
+#slideshow.mobile{
+  overflow-x: scroll;
+}
+
 #slideshow .element .description.mobile::after {
     content: "Show more";
     font-size: 14px;
     display: block;
     position: absolute;
     bottom: 10px;
+}
+
+/* Webkit */
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  footer h3{
+    letter-spacing: -1px;
+  }
 }
