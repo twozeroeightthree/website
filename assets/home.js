@@ -121,6 +121,7 @@ function updateBlocks() {
   });
   activeBlock();
 }
+
 function activeBlock(n = -1) {
   // Highlights the current indicator
   $("#indicators .indicator").removeClass("active");
