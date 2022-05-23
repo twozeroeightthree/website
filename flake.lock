@@ -1,5 +1,28 @@
 {
   "nodes": {
+    "jekyll-flake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "dir": "jekyll-flake",
+        "lastModified": 1653346363,
+        "narHash": "sha256-G/25EDTXNX1f1b06s4SQpGG0m9U/S2lf1HV3Zm0USVk=",
+        "owner": "haztecaso",
+        "repo": "flakes",
+        "rev": "2ec80bba6e0c67c7941571a9b4c730d010a0ce59",
+        "type": "github"
+      },
+      "original": {
+        "dir": "jekyll-flake",
+        "owner": "haztecaso",
+        "repo": "flakes",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1653262524,
@@ -17,11 +40,27 @@
     },
     "root": {
       "inputs": {
+        "jekyll-flake": "jekyll-flake",
         "nixpkgs": "nixpkgs",
-        "utils": "utils"
+        "utils": "utils_2"
       }
     },
     "utils": {
+      "locked": {
+        "lastModified": 1652776076,
+        "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "04c1b180862888302ddfb2e3ad9eaa63afc60cf8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
       "locked": {
         "lastModified": 1652776076,
         "narHash": "sha256-gzTw/v1vj4dOVbpBSJX4J0DwUR6LIyXo7/SuuTJp1kM=",

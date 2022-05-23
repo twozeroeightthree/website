@@ -15,7 +15,7 @@
 	      JEKYLL_ENV=production jekyll build
         '';
         installPhase = ''
-          mkdir -p $out
+          mkdir -p $out/www
           cp -Tr _site $out/www/
         '';
       }) {};
@@ -23,7 +23,7 @@
 
   } // utils.lib.eachDefaultSystem (system:
   let
-    pkgs = import nixpkgs { inherit system; overlays = [jekyll-flake.overlay self.overlay]; }; 
+    pkgs = import nixpkgs { inherit system; overlays = [ jekyll-flake.overlay self.overlay ]; }; 
     mkAppScript = name: script: {
       type = "app";
       program = "${pkgs.writeShellScriptBin name script}/bin/${name}";
@@ -34,7 +34,7 @@
 
     apps.serve = mkAppScript "serve" ''
       export PATH="${pkgs.nodejs}/bin:$PATH"
-      ${pkgs.jekyllFull}/bin/bundle exec jekyll serve --watch --incremental --livereload
+      jekyll serve --watch --incremental --livereload
     '';
 
     apps.serve-prod = mkAppScript "serve-prod" ''
