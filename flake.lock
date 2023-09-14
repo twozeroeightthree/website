@@ -9,11 +9,11 @@
       },
       "locked": {
         "dir": "jekyll-flake",
-        "lastModified": 1653346363,
-        "narHash": "sha256-G/25EDTXNX1f1b06s4SQpGG0m9U/S2lf1HV3Zm0USVk=",
+        "lastModified": 1653350803,
+        "narHash": "sha256-jEulLhgqrndRcMersiBThwHpNLLrKma0esCo6Q3oJOk=",
         "owner": "haztecaso",
         "repo": "flakes",
-        "rev": "2ec80bba6e0c67c7941571a9b4c730d010a0ce59",
+        "rev": "61cef43ddb09199d993ef9f75dfe2c2b57c38af4",
         "type": "github"
       },
       "original": {

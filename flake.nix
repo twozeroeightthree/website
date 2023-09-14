@@ -5,47 +5,31 @@
     jekyll-flake = { url = "github:haztecaso/flakes?dir=jekyll-flake"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
-  outputs = { self, nixpkgs, utils, jekyll-flake }: {
-    overlay = final: prev: {
-      web = final.callPackage ({ stdenv, jekyllFull, ruby, nodejs }: stdenv.mkDerivation {
-        name = "web";
-        src = ./.;
-        buildInputs = [ jekyllFull ruby nodejs ];
-        buildPhase = ''
-	      JEKYLL_ENV=production jekyll build
-        '';
-        installPhase = ''
-          mkdir -p $out/www
-          cp -Tr _site $out/www/
-        '';
-      }) {};
-    };
-
-  } // utils.lib.eachDefaultSystem (system:
-  let
-    pkgs = import nixpkgs { inherit system; overlays = [ jekyll-flake.overlay self.overlay ]; }; 
-    mkAppScript = name: script: {
-      type = "app";
-      program = "${pkgs.writeShellScriptBin name script}/bin/${name}";
-    };
-  in rec {
-    packages.web = pkgs.web;
-    defaultPackage = packages.web;
-
-    apps.serve = mkAppScript "serve" ''
-      export PATH="${pkgs.nodejs}/bin:$PATH"
-      jekyll serve --watch --incremental --livereload
-    '';
-
-    apps.serve-prod = mkAppScript "serve-prod" ''
-      export PATH="${pkgs.nodejs}/bin:$PATH"
-      JEKYLL_ENV=production ${pkgs.jekyllFull}/bin/jekyll serve --watch --incremental --livereload
-    '';
-
-    defaultApp = apps.serve;
-
-    devShell = pkgs.mkShell {
-      nativeBuildInputs = with pkgs; [ jekyllFull ruby nodejs ];
-    };
-  });
+  outputs = { self, nixpkgs, utils, jekyll-flake, ... }:
+    utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; }; 
+        jekyllPackages = jekyll-flake.packages.${system};
+        jekyllApps = jekyll-flake.apps.${system};
+      in rec {
+        packages.twozeroeightthree = jekyllPackages.mkWeb {
+          pname = "twozeroeightthree";
+          version = "1.1";
+          src = ./.;
+        };
+        defaultPackage = packages.twozeroeightthree;
+      
+        apps.serve = jekyllApps.serve;
+        apps.serve-prod = jekyllApps.serve-prod;
+        defaultApp = apps.serve;
+      
+        devShell = pkgs.mkShell {
+          packages = [ jekyllPackages.jekyllFull ];
+          inputsFrom = [ jekyllPackages.jekyllFull ];
+          shellHook = ''
+            alias serve="jekyll serve --watch --incremental --livereload"
+            alias serve-prod="JEKYLL_ENV=production jekyll serve --watch --incremental --livereload"
+          '';
+        };
+      });
 }
