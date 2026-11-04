@@ -23,6 +23,14 @@ jobs:
       contents: read
       deployments: write
     steps:
+      # lists the build on the muelle listing while it runs
+      - uses: haztecaso/muelle@736e277565f91b61158287ec910fb3ea80b2282d # v2.2.0
+        with:
+          endpoint: ${{ secrets.MUELLE_ENDPOINT }}
+          site: twozeroeightthree
+          secret: ${{ secrets.MUELLE_SECRET }}
+          environment: ${{ github.ref_type == 'tag' && 'prod' || github.ref_name == 'master' && 'next' || 'preview' }}
+          action: announce
       - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
       - run: nix build -L
@@ -34,7 +42,7 @@ jobs:
           name: site
           path: site
           retention-days: 1
-      - uses: haztecaso/muelle@b8298785263e776a33e926d070bc999c84335031 # v2.0.0
+      - uses: haztecaso/muelle@736e277565f91b61158287ec910fb3ea80b2282d # v2.2.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
@@ -42,6 +50,15 @@ jobs:
           environment: ${{ github.ref_type == 'tag' && 'prod' || github.ref_name == 'master' && 'next' || 'preview' }}
           artifact-id: ${{ steps.upload.outputs.artifact-id }}
           artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
+      # lists the build as failed if it never got to deploy
+      - if: failure() || cancelled()
+        uses: haztecaso/muelle@736e277565f91b61158287ec910fb3ea80b2282d # v2.2.0
+        with:
+          endpoint: ${{ secrets.MUELLE_ENDPOINT }}
+          site: twozeroeightthree
+          secret: ${{ secrets.MUELLE_SECRET }}
+          environment: ${{ github.ref_type == 'tag' && 'prod' || github.ref_name == 'master' && 'next' || 'preview' }}
+          action: abort
 
   teardown:
     if: github.event_name == 'delete' && github.event.ref_type == 'branch' && !startsWith(github.event.ref, 'dependabot/')
@@ -49,7 +66,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: haztecaso/muelle@b8298785263e776a33e926d070bc999c84335031 # v2.0.0
+      - uses: haztecaso/muelle@736e277565f91b61158287ec910fb3ea80b2282d # v2.2.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
