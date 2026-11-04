@@ -34,7 +34,7 @@ jobs:
           name: site
           path: site
           retention-days: 1
-      - uses: haztecaso/muelle@96632beddc591369a121464eeb93988f2e050d7f # v1.0.0
+      - uses: haztecaso/muelle@b8298785263e776a33e926d070bc999c84335031 # v2.0.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
@@ -49,7 +49,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: haztecaso/muelle@96632beddc591369a121464eeb93988f2e050d7f # v1.0.0
+      - uses: haztecaso/muelle@b8298785263e776a33e926d070bc999c84335031 # v2.0.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
