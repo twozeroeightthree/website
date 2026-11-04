@@ -1,0 +1,57 @@
+name: deploy
+
+on:
+  # master -> next, v* tags -> prod, other branches -> previews
+  push:
+    # Dependabot pushes get no repo secrets, so they cannot deploy
+    branches: ["**", "!dependabot/**"]
+    tags: ["v*"]
+  delete:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.event.ref || github.ref }}
+  # never cancel a prod deploy halfway
+  cancel-in-progress: ${{ github.ref_type != 'tag' }}
+
+jobs:
+  deploy:
+    if: github.event_name != 'delete'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - run: nix build -L
+      # dereference the store symlink so the artifact holds plain files
+      - run: cp -rL result site
+      - id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: site
+          retention-days: 1
+      - uses: haztecaso/muelle@96632beddc591369a121464eeb93988f2e050d7f # v1.0.0
+        with:
+          endpoint: ${{ secrets.MUELLE_ENDPOINT }}
+          site: twozeroeightthree
+          secret: ${{ secrets.MUELLE_SECRET }}
+          environment: ${{ github.ref_type == 'tag' && 'prod' || github.ref_name == 'master' && 'next' || 'preview' }}
+          artifact-id: ${{ steps.upload.outputs.artifact-id }}
+          artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
+
+  teardown:
+    if: github.event_name == 'delete' && github.event.ref_type == 'branch' && !startsWith(github.event.ref, 'dependabot/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: haztecaso/muelle@96632beddc591369a121464eeb93988f2e050d7f # v1.0.0
+        with:
+          endpoint: ${{ secrets.MUELLE_ENDPOINT }}
+          site: twozeroeightthree
+          secret: ${{ secrets.MUELLE_SECRET }}
+          action: teardown
