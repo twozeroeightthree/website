@@ -4,15 +4,14 @@ order: 7
 description: "Posidonia Oceanica (commonly known as Neptune grass or Mediterranean tapeweed) is a plant that grows only in the Mediterranean and Caribbean seas."
 dimensions:
   - "Circumference approx. 5 m"
-# TODO: alt texts are placeholders (the work title); replace with curatorial descriptions
 cover:
   src: ./posidonias_01.jpg
-  alt: "Posidonias"
+  alt: "Close-up of the necklace's strands of brown, fibrous Posidonia balls"
 gallery:
   - src: ./posidonias_01.jpg
-    alt: "Posidonias"
+    alt: "Close-up of the necklace's strands of brown, fibrous Posidonia balls"
   - src: ./posidonias_02.jpg
-    alt: "Posidonias"
+    alt: "Necklace of brown, fibrous Posidonia balls hanging in long loops on a white wall"
 ---
 
 Posidonia Oceanica (commonly known as Neptune grass or Mediterranean tapeweed) is a plant that grows only in the Mediterranean and Caribbean seas.

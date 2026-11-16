@@ -4,23 +4,22 @@ order: 4
 description: "A conical form, made from a single length of spiralling packing tape, held in place by a single elastic band."
 dimensions:
   - "Approx. 17 × 7 cm"
-# TODO: alt texts are placeholders (the work title); replace with curatorial descriptions
 cover:
   src: ./cone_04.jpg
-  alt: "Packing tape cones"
+  alt: "Tall yellow packing tape cone on a black surface, held by a brown elastic band around its base"
 gallery:
   - src: ./cone_01.jpg
-    alt: "Packing tape cones"
+    alt: "Close-up of three yellow packing tape cones on a black surface"
   - src: ./cone_02.jpg
-    alt: "Packing tape cones"
+    alt: "Close-up of the translucent yellow packing tape spiralling around a cone"
   - src: ./cone_03.jpg
-    alt: "Packing tape cones"
+    alt: "Yellow packing tape cone on a black surface, held by a black elastic band around its base"
   - src: ./cone_04.jpg
-    alt: "Packing tape cones"
+    alt: "Tall yellow packing tape cone on a black surface, held by a brown elastic band around its base"
   - src: ./cone_05.jpg
-    alt: "Packing tape cones"
+    alt: "View down the inside of a yellow packing tape cone towards its dark opening"
   - src: ./cone_06.jpg
-    alt: "Packing tape cones"
+    alt: "Out-of-focus lights glowing through yellow packing tape"
 ---
 
 A conical form, made from a single length of spiralling packing tape, held in place by a single elastic band.

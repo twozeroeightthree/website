@@ -3,19 +3,18 @@ title: "72 rolls _ 32 balls"
 order: 8
 description: "A single location provides for the preservation and on-going collection of toilet rolls, the cardboard is of an industrial weight entirely disproportionate to its function."
 infoOnRequest: true
-# TODO: alt texts are placeholders (the work title); replace with curatorial descriptions
 cover:
   src: ./rolls_01.jpg
-  alt: "72 rolls _ 32 balls"
+  alt: "Close-up of stacked cardboard tubes, each topped with a red snooker ball"
 gallery:
   - src: ./rolls_01.jpg
-    alt: "72 rolls _ 32 balls"
+    alt: "Close-up of stacked cardboard tubes, each topped with a red snooker ball"
   - src: ./rolls_02.jpg
-    alt: "72 rolls _ 32 balls"
+    alt: "Cardboard tubes of different heights stacked in a dense cluster, each topped with a red snooker ball"
   - src: ./rolls_03.jpg
-    alt: "72 rolls _ 32 balls"
+    alt: "Rows of cardboard tubes of different heights, each topped with a red snooker ball, on a black surface"
   - src: ./rolls_04.jpg
-    alt: "72 rolls _ 32 balls"
+    alt: "Repeating pattern of pale circle outlines on a grey-green ground, like the cardboard tubes seen from above"
 ---
 
 A single location provides for the preservation and on-going collection of toilet rolls, the cardboard is of an industrial weight entirely disproportionate to its function.

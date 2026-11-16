@@ -2,21 +2,20 @@
 title: "Found objects"
 order: 6
 description: "Found objects or fragments are presented in isolation or as a collective."
-# TODO: alt texts are placeholders (the work title); replace with curatorial descriptions
 cover:
   src: ./found_objects_01.jpg
-  alt: "Found objects"
+  alt: "Bundle of frayed green rope and pale twine, tied at the middle, on a white wall"
 gallery:
   - src: ./found_objects_01.jpg
-    alt: "Found objects"
+    alt: "Bundle of frayed green rope and pale twine, tied at the middle, on a white wall"
   - src: ./found_objects_02.jpg
-    alt: "Found objects"
+    alt: "Grey plastic strap in loose loops, its end split into strands, on a white wall"
   - src: ./found_objects_03.jpg
-    alt: "Found objects"
+    alt: "Tuft of brown fibres trailing into a tangle of white thread, on a white wall"
   - src: ./found_objects_04.jpg
-    alt: "Found objects"
+    alt: "Tangle of light blue string with a loop of yellow cord below it, on a white wall"
   - src: ./found_objects_05.jpg
-    alt: "Found objects"
+    alt: "Loose loops of thin grey wire caught around a dried twig with reddish fibres, on a white wall"
 ---
 
 Found objects or fragments are presented in isolation or as a collective.

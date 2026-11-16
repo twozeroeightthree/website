@@ -5,21 +5,20 @@ description: "An on-going series of works where collections of bottle tops are h
 dimensions:
   - "50 × 50 × 5 cm"
   - "80 × 60 × 5 cm"
-# TODO: alt texts are placeholders (the work title); replace with curatorial descriptions
 cover:
   src: ./Tops_01.jpg
-  alt: "Tops"
+  alt: "White box frame on a white wall, its lower third filled with yellow, orange, blue and black bottle tops"
 gallery:
   - src: ./Tops_01.jpg
-    alt: "Tops"
+    alt: "White box frame on a white wall, its lower third filled with yellow, orange, blue and black bottle tops"
   - src: ./Tops_02.jpg
-    alt: "Tops"
+    alt: "White box frame on a white wall, with purple, blue and black bottle tops sloping up to one side"
   - src: ./Tops_03.jpg
-    alt: "Tops"
+    alt: "White box frame on a white wall, half filled with blue and black bottle tops, a few loose near the top"
   - src: ./Tops_04.jpg
-    alt: "Tops"
+    alt: "Tall white box frame on a white wall, almost filled with turquoise, blue, green and white bottle tops"
   - src: ./Tops_05.jpg
-    alt: "Tops"
+    alt: "White box frame on a white wall, its lower half filled with dark red, orange, purple and blue bottle tops"
 ---
 
 An on-going series of works where collections of bottle tops are housed within a box frame. The joy comes from adhering to a process which removes the need for any decisions or thoughts concerning the aesthetic.
