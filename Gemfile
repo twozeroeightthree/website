@@ -1,6 +1,5 @@
 source "https://rubygems.org"
 gem "jekyll"
-gem "jekyll-paginate"
 gem "jekyll-sitemap"
 gem "jekyll-seo-tag"
 # v3 uses sass-embedded (prebuilt dart-sass binary), awkward under Nix

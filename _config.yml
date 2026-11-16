@@ -5,10 +5,8 @@ baseurl: "/"
 url: "https://twozeroeightthree.com"
 lang: en
 
-plugins: [jekyll-paginate, jekyll-sitemap, jekyll-seo-tag]
+plugins: [jekyll-sitemap, jekyll-seo-tag]
 
 permalink: /:title/
-paginate_pathds: /projects/:num/
-paginate: 5
 
-exclude: [ref.pdf, size-ref.png, README.md, notes.md, CNAME, compile.sh, watch.sh, flake.nix, flake.lock, gemset.nix, _posts/2000-01-01-template.html]
+exclude: [ref.pdf, size-ref.png, README.md, notes.md, CNAME, compile.sh, flake.nix, result, flake.lock, gemset.nix, _posts/2000-01-01-template.html]
