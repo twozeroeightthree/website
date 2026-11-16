@@ -1,0 +1,5 @@
+# Broken links in the built HTML: lychee --root-dir "$PWD/dist" dist
+no_progress = true
+include_fragments = "full"
+# the email and enquiry links (mailto:) are not checked
+include_mail = false

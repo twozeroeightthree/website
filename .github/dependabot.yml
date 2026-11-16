@@ -8,3 +8,15 @@ updates:
     groups:
       actions:
         patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    ignore:
+      # pinned to the Playwright browsers in nixpkgs; bumped with flake.lock
+      - dependency-name: "@playwright/test"
+    groups:
+      astro:
+        patterns: ["astro", "@astrojs/*"]
+      other:
+        patterns: ["*"]

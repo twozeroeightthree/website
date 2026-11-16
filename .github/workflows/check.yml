@@ -1,0 +1,33 @@
+name: check
+
+# Dependabot branches are not deployed (no secrets), so build and test them here
+on:
+  pull_request:
+
+jobs:
+  build:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - run: nix build -L .#preview
+      # the tests serve dist/ themselves (astro preview, lhci)
+      - run: cp -rL result dist && chmod -R u+w dist
+      - run: nix develop -c npm ci
+      - run: nix develop -c npm test
+      - if: ${{ !cancelled() }}
+        run: nix develop -c npm run test:links
+      - if: ${{ !cancelled() }}
+        run: nix develop -c npm run test:lighthouse
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: reports
+          path: |
+            playwright-report
+            test-results
+            .lighthouseci
+          retention-days: 14

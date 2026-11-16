@@ -1,0 +1,89 @@
+---
+import { Picture } from "astro:assets";
+import { type Work, workUrl } from "../lib/site";
+
+interface Props {
+  work: Work;
+  eager?: boolean;
+}
+const { work, eager = false } = Astro.props;
+const { cover, title, location } = work.data;
+---
+
+<li class="card">
+  <a href={workUrl(work)} tabindex="-1">
+    <Picture
+      src={cover.src}
+      alt={cover.alt}
+      width={345}
+      height={460}
+      fit="cover"
+      widths={[345, 550, 690, 1100]}
+      sizes="(min-width: 56rem) 345px, min(100vw - 50px, 550px)"
+      formats={["avif", "webp"]}
+      loading={eager ? "eager" : "lazy"}
+      fetchpriority={eager ? "high" : "auto"}
+    />
+    <span class="caption">
+      {location && <span class="location">{location}</span>}
+      <span class="title">{title}</span>
+    </span>
+  </a>
+</li>
+
+<style>
+  .card a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+  }
+  .card :global(img) {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+  /* Touch and small screens: caption always visible under the image */
+  .caption {
+    display: block;
+    color: var(--fg);
+    padding-block: 0.4em 0.8em;
+    font-size: 16px;
+  }
+  .caption > span {
+    display: block;
+  }
+
+  @media (min-width: 56rem) {
+    .card {
+      scroll-snap-align: start;
+    }
+    .card :global(img) {
+      width: var(--thumb-w);
+      height: var(--thumb-h);
+    }
+  }
+
+  /* Desktop with a mouse: caption over the top half on hover */
+  @media (min-width: 56rem) and (hover: hover) {
+    .caption {
+      position: absolute;
+      inset: 0 0 50% 0;
+      padding: 15px;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.5;
+      background: rgb(0 0 0 / 0.6);
+      opacity: 0;
+    }
+    .card a:hover .caption {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .caption {
+      transition: opacity 0.15s;
+    }
+  }
+</style>

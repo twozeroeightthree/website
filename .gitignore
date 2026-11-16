@@ -1,6 +1,8 @@
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
+node_modules/
+dist/
+.astro/
 result
 .DS_Store
+test-results/
+playwright-report/
+.lighthouseci/

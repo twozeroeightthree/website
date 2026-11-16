@@ -1,0 +1,220 @@
+/* Reset (after Andy Bell's "modern CSS reset") */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+img,
+picture,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Tokens */
+:root {
+  --fg: #000;
+  --bg: #fff;
+  /* Greys from the original design */
+  --grey: rgb(150 150 150);
+  --grey-facts: rgb(157 157 157);
+  --grey-nav: rgb(135 135 135);
+  --grey-nav-visited: rgb(175 175 175);
+  --grey-light: rgb(170 170 170);
+  --pad: 25px;
+  --gap: 10px;
+  --side: clamp(18rem, 32vw, 450px);
+  --thumb-w: 345px;
+  --thumb-h: 460px;
+  --font: var(--font-din), Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--fg);
+  background: var(--bg);
+  padding: var(--pad);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+a:hover {
+  text-decoration: none;
+}
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: var(--pad);
+  top: -100px;
+  z-index: 100;
+  background: var(--bg);
+  padding: 0.5em 1em;
+}
+.skip:focus {
+  top: var(--pad);
+}
+
+/* Layout: one column on small screens; from 56rem the left column (logo,
+   text, footer) stays in place while the media column scrolls */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "header" "panel" "media" "footer";
+  row-gap: 1.5rem;
+}
+/* on small screens the footer goes after the media, so .side dissolves */
+.side {
+  display: contents;
+}
+.site-header {
+  grid-area: header;
+}
+.panel {
+  grid-area: panel;
+  max-width: 550px;
+}
+.media {
+  grid-area: media;
+  min-width: 0;
+}
+.site-footer {
+  grid-area: footer;
+  max-width: 550px;
+}
+
+@media (min-width: 56rem) {
+  .layout {
+    grid-template-columns: var(--side) minmax(0, 1fr);
+    grid-template-areas: "side media";
+    column-gap: 30px;
+    align-items: start;
+  }
+  .side {
+    grid-area: side;
+    display: block;
+    position: sticky;
+    top: var(--pad);
+    /* scrolls on its own when the window is too short (the old fixed
+       footer was unreachable below ~590px) */
+    max-height: calc(100dvh - 2 * var(--pad));
+    overflow-y: auto;
+  }
+  .panel {
+    max-width: none;
+    padding-top: 0.6rem;
+    /* puts the footer around y=500px like the old fixed one, or below longer texts */
+    min-height: 380px;
+  }
+  .site-footer {
+    max-width: none;
+    padding-top: 2.5rem;
+  }
+}
+
+.logo {
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Footer */
+.site-footer {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.site-footer .email {
+  font-weight: 300;
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--fg);
+}
+.site-footer .email:hover {
+  text-decoration: underline;
+}
+.works-nav ul {
+  margin-block: 1em;
+}
+/* inline-block keeps "EX-FOOTBALL" whole while still wrapping between works */
+.works-nav li {
+  display: inline-block;
+  text-transform: uppercase;
+  white-space: pre;
+}
+.works-nav li:not(:last-child)::after {
+  content: " / ";
+  color: var(--grey-nav);
+}
+.works-nav a {
+  color: var(--grey-nav);
+  text-decoration: none;
+}
+.works-nav a:visited {
+  color: var(--grey-nav-visited);
+}
+.works-nav a:hover,
+.works-nav a[aria-current="page"] {
+  color: var(--fg);
+}
+.copyright {
+  font-weight: 300;
+  color: var(--grey-light);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+@media print {
+  .skip,
+  .site-footer,
+  .rail-controls {
+    display: none !important;
+  }
+  .layout {
+    display: block;
+  }
+  .gallery li:not(:first-child) {
+    display: none;
+  }
+}

@@ -1,0 +1,99 @@
+---
+import { render } from "astro:content";
+import { getImage } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Gallery from "../components/Gallery.astro";
+import Lightbox from "../components/Lightbox.astro";
+import { SITE, getWorks, workUrl, fullTitle, type Work } from "../lib/site";
+
+export async function getStaticPaths() {
+  const works = await getWorks();
+  return works.map((work) => ({ params: { slug: work.id }, props: { work } }));
+}
+
+interface Props {
+  work: Work;
+}
+const { work } = Astro.props;
+const { Content } = await render(work);
+const d = work.data;
+
+const og = await getImage({ src: d.cover.src, width: 1200, height: 630, fit: "cover", format: "jpg" });
+const enquiry = `mailto:${SITE.email}?subject=${encodeURIComponent(`Enquiry: ${d.title}`)}`;
+// Small grey lines under the text, as on the old site
+const facts = [d.year && String(d.year), d.materials?.join(", "), ...(d.dimensions ?? [])].filter(Boolean);
+---
+
+<Base
+  title={d.title}
+  description={d.description}
+  image={og.src}
+  type="article"
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "VisualArtwork",
+    name: fullTitle(work),
+    description: d.description,
+    url: new URL(workUrl(work), Astro.site).href,
+    image: new URL(og.src, Astro.site).href,
+    creator: { "@type": "Person", name: SITE.author },
+    ...(d.year && { dateCreated: String(d.year) }),
+    ...(d.materials && { artMedium: d.materials.join(", ") }),
+  }}
+>
+  <Fragment slot="panel">
+    <div class="work">
+      <h1 id="page-title">
+        {d.location && <span class="location">{d.location}</span>}
+        <span>{d.title}</span>
+      </h1>
+      <div class="text"><Content /></div>
+      {
+        facts.length > 0 && (
+          <p class="facts">
+            {facts.map((line) => (
+              <span>{line}</span>
+            ))}
+          </p>
+        )
+      }
+      {d.infoOnRequest && <p class="facts"><a href={enquiry}>+ info upon request</a></p>}
+    </div>
+  </Fragment>
+  <h2 class="visually-hidden">Images</h2>
+  <Gallery work={work} />
+  <Lightbox />
+</Base>
+
+<style is:global>
+  .work h1 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.05;
+    color: var(--grey);
+    margin-bottom: 0.6em;
+  }
+  .work h1 > span {
+    display: block;
+  }
+  .work .text p {
+    font-size: 18px;
+    line-height: 1.3;
+    margin-bottom: 0.5em;
+  }
+  .facts {
+    font-size: 14px;
+    margin-bottom: 1em;
+    color: var(--grey-facts);
+  }
+  .facts > span {
+    display: block;
+  }
+  .facts a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .facts a:hover {
+    color: var(--fg);
+  }
+</style>

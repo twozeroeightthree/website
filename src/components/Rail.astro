@@ -1,0 +1,138 @@
+---
+import WorkCard from "./WorkCard.astro";
+import type { Work } from "../lib/site";
+
+interface Props {
+  works: Work[];
+}
+const { works } = Astro.props;
+---
+
+<section class="works" aria-label="Works" data-rail>
+  <ul class="rail" role="list">
+    {works.map((work, i) => <WorkCard work={work} eager={i < 3} />)}
+  </ul>
+  <div class="rail-controls" hidden>
+    <button type="button" class="rail-prev" aria-label="Previous works">
+      <svg viewBox="0 0 187 442" aria-hidden="true"><path d="M12.3,441.2c-2.6,0-5.1-0.8-7.3-2.5c-5.4-4.1-6.5-11.7-2.4-17.1l150.7-201L2.5,19.6c-4.1-5.4-3-13.1,2.4-17.1C10.4-1.6,18-0.5,22.1,4.9l161.8,215.7L22.1,436.3C19.7,439.5,16,441.2,12.3,441.2z" /></svg>
+    </button>
+    <button type="button" class="rail-next" aria-label="Next works">
+      <svg viewBox="0 0 187 442" aria-hidden="true"><path d="M12.3,441.2c-2.6,0-5.1-0.8-7.3-2.5c-5.4-4.1-6.5-11.7-2.4-17.1l150.7-201L2.5,19.6c-4.1-5.4-3-13.1,2.4-17.1C10.4-1.6,18-0.5,22.1,4.9l161.8,215.7L22.1,436.3C19.7,439.5,16,441.2,12.3,441.2z" /></svg>
+    </button>
+    <div class="rail-pages" role="group" aria-label="Pages"></div>
+  </div>
+</section>
+
+<style>
+  .rail {
+    display: grid;
+    gap: var(--gap);
+  }
+  @media (min-width: 56rem) {
+    .works {
+      position: relative;
+    }
+    .rail {
+      /* bleed to the right edge of the window */
+      margin-right: calc(-1 * var(--pad));
+      grid-auto-flow: column;
+      grid-auto-columns: var(--thumb-w);
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .rail::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Controls only exist once the script has run and on wide screens */
+  .rail-controls {
+    display: none;
+  }
+  @media (min-width: 56rem) {
+    .rail-controls:not([hidden]) {
+      display: block;
+    }
+    /* Same size and place as the old arrow: 90×150 hit area near the window edge */
+    .rail-prev,
+    .rail-next {
+      position: absolute;
+      top: calc(var(--thumb-h) / 2 - 75px);
+      width: 90px;
+      height: 150px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      /* keeps the white chevron visible over light photos */
+      filter: drop-shadow(0 0 2px rgb(0 0 0 / 0.5));
+    }
+    .rail-prev {
+      left: 0;
+    }
+    .rail-next {
+      right: calc(5px - var(--pad));
+    }
+    .rail-prev[hidden] {
+      display: none;
+    }
+    .rail-prev svg,
+    .rail-next svg {
+      width: 32px;
+      height: 76px;
+      fill: #fff;
+    }
+    .rail-prev svg {
+      transform: scaleX(-1);
+    }
+    .rail-pages {
+      display: flex;
+      gap: 5px;
+      margin-top: 12px;
+    }
+    .rail-pages :global(button) {
+      width: 20px;
+      /* 6px bar inside a 22px hit area */
+      height: 22px;
+      padding: 8px 0;
+      margin-block: -8px;
+      border: 0;
+      background: #b4b4b4;
+      background-clip: content-box;
+      cursor: pointer;
+    }
+    .rail-pages :global(button)[aria-current="true"] {
+      background-color: #646464;
+    }
+    @media (forced-colors: active) {
+      .rail-pages :global(button) {
+        border: 1px solid ButtonText;
+        background-clip: border-box;
+        padding: 0;
+        height: 6px;
+        margin: 0;
+      }
+      .rail-pages :global(button)[aria-current="true"] {
+        background: Highlight;
+      }
+      .rail-prev svg,
+      .rail-next svg {
+        fill: ButtonText;
+      }
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rail {
+      scroll-behavior: smooth;
+    }
+  }
+</style>
+
+<script>
+  import { initRail } from "../scripts/rail";
+  for (const el of document.querySelectorAll<HTMLElement>("[data-rail]")) initRail(el);
+</script>
