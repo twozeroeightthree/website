@@ -20,19 +20,19 @@ const { pageClass, ...seo } = Astro.props;
   <body>
     <a class="skip" href="#content">Skip to content</a>
     <div class:list={["layout", pageClass]}>
-      <header class="site-header">
-        <a class="logo" href="/" aria-label="2083, home">2083</a>
-        <slot name="header" />
-      </header>
-      <main>
-        <section class="panel" id="content" tabindex="-1">
+      <div class="side">
+        <header class="site-header">
+          <a class="logo" href="/" aria-label="2083, home">2083</a>
+          <slot name="header" />
+        </header>
+        <section class="panel" id="content" tabindex="-1" aria-labelledby="page-title">
           <slot name="panel" />
         </section>
-        <div class="media">
-          <slot />
-        </div>
+        <SiteFooter />
+      </div>
+      <main class="media">
+        <slot />
       </main>
-      <SiteFooter />
     </div>
   </body>
 </html>

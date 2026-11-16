@@ -8,24 +8,20 @@ import { SITE, getWorks, workUrl, fullTitle, type Work } from "../lib/site";
 
 export async function getStaticPaths() {
   const works = await getWorks();
-  return works.map((work, i) => ({
-    params: { slug: work.id },
-    props: { work, prev: works[i - 1], next: works[i + 1] },
-  }));
+  return works.map((work) => ({ params: { slug: work.id }, props: { work } }));
 }
 
 interface Props {
   work: Work;
-  prev?: Work;
-  next?: Work;
 }
-const { work, prev, next } = Astro.props;
+const { work } = Astro.props;
 const { Content } = await render(work);
 const d = work.data;
 
 const og = await getImage({ src: d.cover.src, width: 1200, height: 630, fit: "cover", format: "jpg" });
 const enquiry = `mailto:${SITE.email}?subject=${encodeURIComponent(`Enquiry: ${d.title}`)}`;
-const hasFacts = d.year || d.materials?.length || d.dimensions?.length;
+// Small grey lines under the text, as on the old site
+const facts = [d.year && String(d.year), d.materials?.join(", "), ...(d.dimensions ?? [])].filter(Boolean);
 ---
 
 <Base
@@ -47,42 +43,21 @@ const hasFacts = d.year || d.materials?.length || d.dimensions?.length;
 >
   <Fragment slot="panel">
     <div class="work">
-      <h1>
+      <h1 id="page-title">
         {d.location && <span class="location">{d.location}</span>}
         <span>{d.title}</span>
       </h1>
       <div class="text"><Content /></div>
       {
-        hasFacts && (
-          <dl class="facts">
-            {d.year && (
-              <>
-                <dt>Year</dt>
-                <dd>{d.year}</dd>
-              </>
-            )}
-            {d.materials?.length && (
-              <>
-                <dt>Materials</dt>
-                <dd>{d.materials.join(", ")}</dd>
-              </>
-            )}
-            {d.dimensions?.length && (
-              <>
-                <dt>Dimensions</dt>
-                {d.dimensions.map((x) => (
-                  <dd>{x}</dd>
-                ))}
-              </>
-            )}
-          </dl>
+        facts.length > 0 && (
+          <p class="facts">
+            {facts.map((line) => (
+              <span>{line}</span>
+            ))}
+          </p>
         )
       }
-      {d.infoOnRequest && <p class="enquiry"><a href={enquiry}>+ info upon request</a></p>}
-      <nav class="work-nav" aria-label="Previous and next work">
-        {prev && <a href={workUrl(prev)} rel="prev">← {prev.data.title}</a>}
-        {next && <a href={workUrl(next)} rel="next">{next.data.title} →</a>}
-      </nav>
+      {d.infoOnRequest && <p class="facts"><a href={enquiry}>+ info upon request</a></p>}
     </div>
   </Fragment>
   <h2 class="visually-hidden">Images</h2>
@@ -91,23 +66,11 @@ const hasFacts = d.year || d.materials?.length || d.dimensions?.length;
 </Base>
 
 <style is:global>
-  @media (min-width: 56rem) {
-    .panel:has(.work) {
-      align-self: stretch;
-    }
-    /* The text stays in view while the images scroll; it scrolls itself if taller than the screen */
-    .work {
-      position: sticky;
-      top: var(--pad);
-      max-height: calc(100dvh - 2 * var(--pad));
-      overflow-y: auto;
-    }
-  }
   .work h1 {
     font-size: 24px;
     font-weight: 500;
     line-height: 1.05;
-    color: var(--muted);
+    color: var(--grey);
     margin-bottom: 0.6em;
   }
   .work h1 > span {
@@ -119,39 +82,18 @@ const hasFacts = d.year || d.materials?.length || d.dimensions?.length;
     margin-bottom: 0.5em;
   }
   .facts {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 1em;
     font-size: 14px;
-    margin-block: 1em;
-    color: var(--muted);
+    margin-bottom: 1em;
+    color: var(--grey-facts);
   }
-  .facts dt {
-    grid-column: 1;
+  .facts > span {
+    display: block;
   }
-  .facts dd {
-    grid-column: 2;
-    color: var(--fg);
-  }
-  .enquiry {
-    font-size: 14px;
-    margin-block: 1em;
-  }
-  .work-nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 1em;
-    font-size: 14px;
-    margin-top: 1.5em;
-  }
-  .work-nav a {
+  .facts a {
+    color: inherit;
     text-decoration: none;
-    color: var(--muted);
   }
-  .work-nav a:hover {
+  .facts a:hover {
     color: var(--fg);
-  }
-  .work-nav a[rel="next"] {
-    margin-left: auto;
   }
 </style>

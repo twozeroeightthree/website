@@ -19,7 +19,7 @@ const works = await getWorks();
 >
   <button slot="header" type="button" class="about-toggle" hidden>About</button>
   <Fragment slot="panel">
-    <h1 class="visually-hidden">2083 — Brendan McCormick</h1>
+    <h1 id="page-title" class="visually-hidden">2083 — Brendan McCormick</h1>
     <div class="intro">
       <p>
         Located somewhere between art and design. Informed by a simple impulse or thought and
@@ -39,7 +39,7 @@ const works = await getWorks();
 
 <style is:global>
   .intro p {
-    color: var(--muted);
+    color: var(--grey);
     line-height: 1.2;
     word-spacing: 1px;
     margin-bottom: 1em;
@@ -56,7 +56,7 @@ const works = await getWorks();
     border: 0;
     background: none;
     font-size: 14px;
-    color: var(--muted);
+    color: var(--grey);
     text-decoration: underline;
     cursor: pointer;
   }
@@ -65,21 +65,25 @@ const works = await getWorks();
   }
 
   @media (min-width: 56rem) {
+    /* Expanded: the text fades out, the rail takes its place and the
+       footer drops below the rail, as on the old site */
     .home[data-expanded] {
       grid-template-columns: 75px minmax(0, 1fr);
-      grid-template-areas:
-        "header media"
-        "panel  media"
-        "footer footer";
+    }
+    .home[data-expanded] .side {
+      overflow: visible;
     }
     .home[data-expanded] .panel {
+      position: absolute;
+      width: var(--side);
       visibility: hidden;
       opacity: 0;
-      width: 0;
-      overflow: hidden;
     }
     .home[data-expanded] .site-footer {
-      padding-top: 1.5rem;
+      position: absolute;
+      top: calc(var(--thumb-h) + 35px);
+      width: var(--side);
+      padding-top: 0;
     }
   }
   @media (min-width: 56rem) and (prefers-reduced-motion: no-preference) {

@@ -7,7 +7,7 @@ const works = await getWorks();
 
 <Base title="Page not found">
   <Fragment slot="panel">
-    <h1 class="not-found">Page not found</h1>
+    <h1 id="page-title" class="not-found">Page not found</h1>
     <p>The page you are looking for does not exist. These are the works:</p>
   </Fragment>
   <ul class="index" role="list">
@@ -19,7 +19,7 @@ const works = await getWorks();
   .not-found {
     font-size: 24px;
     font-weight: 500;
-    color: var(--muted);
+    color: var(--grey);
     margin-bottom: 0.6em;
   }
   .index {

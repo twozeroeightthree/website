@@ -33,8 +33,12 @@ button {
 :root {
   --fg: #000;
   --bg: #fff;
-  /* 5.3:1 on white; the old greys were 2.3–3:1 */
-  --muted: #6b6b6b;
+  /* Greys from the original design */
+  --grey: rgb(150 150 150);
+  --grey-facts: rgb(157 157 157);
+  --grey-nav: rgb(135 135 135);
+  --grey-nav-visited: rgb(175 175 175);
+  --grey-light: rgb(170 170 170);
   --pad: 25px;
   --gap: 10px;
   --side: clamp(18rem, 32vw, 450px);
@@ -87,12 +91,17 @@ a:hover {
   top: var(--pad);
 }
 
-/* Layout: one column on small screens, [side | media] from 56rem */
+/* Layout: one column on small screens; from 56rem the left column (logo,
+   text, footer) stays in place while the media column scrolls */
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-areas: "header" "panel" "media" "footer";
   row-gap: 1.5rem;
+}
+/* on small screens the footer goes after the media, so .side dissolves */
+.side {
+  display: contents;
 }
 .site-header {
   grid-area: header;
@@ -109,26 +118,29 @@ a:hover {
   grid-area: footer;
   max-width: 550px;
 }
-/* main only groups panel + media semantically; they are laid out by .layout */
-.layout > main {
-  display: contents;
-}
 
 @media (min-width: 56rem) {
   .layout {
     grid-template-columns: var(--side) minmax(0, 1fr);
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-      "header media"
-      "panel  media"
-      "footer media";
+    grid-template-areas: "side media";
     column-gap: 30px;
-    row-gap: 0;
     align-items: start;
+  }
+  .side {
+    grid-area: side;
+    display: block;
+    position: sticky;
+    top: var(--pad);
+    /* scrolls on its own when the window is too short (the old fixed
+       footer was unreachable below ~590px) */
+    max-height: calc(100dvh - 2 * var(--pad));
+    overflow-y: auto;
   }
   .panel {
     max-width: none;
     padding-top: 0.6rem;
+    /* puts the footer around y=500px like the old fixed one, or below longer texts */
+    min-height: 380px;
   }
   .site-footer {
     max-width: none;
@@ -153,6 +165,7 @@ a:hover {
   font-weight: 300;
   font-size: 13px;
   text-decoration: none;
+  color: var(--fg);
 }
 .site-footer .email:hover {
   text-decoration: underline;
@@ -168,11 +181,14 @@ a:hover {
 }
 .works-nav li:not(:last-child)::after {
   content: " / ";
-  color: var(--muted);
+  color: var(--grey-nav);
 }
 .works-nav a {
-  color: var(--muted);
+  color: var(--grey-nav);
   text-decoration: none;
+}
+.works-nav a:visited {
+  color: var(--grey-nav-visited);
 }
 .works-nav a:hover,
 .works-nav a[aria-current="page"] {
@@ -180,7 +196,7 @@ a:hover {
 }
 .copyright {
   font-weight: 300;
-  color: var(--muted);
+  color: var(--grey-light);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -192,8 +208,7 @@ a:hover {
 @media print {
   .skip,
   .site-footer,
-  .rail-controls,
-  .work-nav {
+  .rail-controls {
     display: none !important;
   }
   .layout {
