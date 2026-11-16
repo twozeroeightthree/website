@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import { getWorks, workUrl } from "../lib/site";
+
+const works = await getWorks();
+---
+
+<Base title="Page not found">
+  <Fragment slot="panel">
+    <h1 class="not-found">Page not found</h1>
+    <p>The page you are looking for does not exist. These are the works:</p>
+  </Fragment>
+  <ul class="index" role="list">
+    {works.map((w) => <li><a href={workUrl(w)}>{w.data.title}</a></li>)}
+  </ul>
+</Base>
+
+<style>
+  .not-found {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 0.6em;
+  }
+  .index {
+    font-size: 25px;
+    line-height: 1.4;
+  }
+  .index a {
+    text-decoration: none;
+  }
+  .index a:hover {
+    text-decoration: underline;
+  }
+</style>

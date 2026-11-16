@@ -1,0 +1,135 @@
+---
+import WorkCard from "./WorkCard.astro";
+import type { Work } from "../lib/site";
+
+interface Props {
+  works: Work[];
+}
+const { works } = Astro.props;
+---
+
+<section class="works" aria-label="Works" data-rail>
+  <ul class="rail" role="list" tabindex="0" aria-label="Works, scroll horizontally">
+    {works.map((work, i) => <WorkCard work={work} eager={i < 3} />)}
+  </ul>
+  <div class="rail-controls" hidden>
+    <button type="button" class="rail-prev" aria-label="Previous works">
+      <svg viewBox="0 0 20 40" aria-hidden="true"><path d="M18 2 2 20l16 18" /></svg>
+    </button>
+    <button type="button" class="rail-next" aria-label="Next works">
+      <svg viewBox="0 0 20 40" aria-hidden="true"><path d="m2 2 16 18L2 38" /></svg>
+    </button>
+    <div class="rail-pages" role="group" aria-label="Pages"></div>
+  </div>
+</section>
+
+<style>
+  .rail {
+    display: grid;
+    gap: var(--gap);
+  }
+  @media (min-width: 56rem) {
+    .works {
+      position: relative;
+    }
+    .rail {
+      /* bleed to the right edge of the window */
+      margin-right: calc(-1 * var(--pad));
+      grid-auto-flow: column;
+      grid-auto-columns: var(--thumb-w);
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .rail::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Controls only exist once the script has run and on wide screens */
+  .rail-controls {
+    display: none;
+  }
+  @media (min-width: 56rem) {
+    .rail-controls:not([hidden]) {
+      display: block;
+    }
+    .rail-prev,
+    .rail-next {
+      position: absolute;
+      top: calc(var(--thumb-h) / 2 - 50px);
+      width: 44px;
+      height: 100px;
+      display: grid;
+      place-items: center;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      /* keeps the white chevron visible over light photos */
+      filter: drop-shadow(0 0 3px rgb(0 0 0 / 0.6));
+    }
+    .rail-prev {
+      left: 0;
+    }
+    .rail-next {
+      right: 0;
+    }
+    .rail-prev[hidden] {
+      display: none;
+    }
+    .rail-prev svg,
+    .rail-next svg {
+      width: 20px;
+      height: 40px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.5;
+    }
+    .rail-pages {
+      display: flex;
+      gap: 5px;
+      margin-top: 12px;
+    }
+    .rail-pages :global(button) {
+      width: 20px;
+      /* 6px bar inside a 22px hit area */
+      height: 22px;
+      padding: 8px 0;
+      margin-block: -8px;
+      border: 0;
+      background: #b4b4b4;
+      background-clip: content-box;
+      cursor: pointer;
+    }
+    .rail-pages :global(button)[aria-current="true"] {
+      background-color: #646464;
+    }
+    @media (forced-colors: active) {
+      .rail-pages :global(button) {
+        border: 1px solid ButtonText;
+        background-clip: border-box;
+        padding: 0;
+        height: 6px;
+        margin: 0;
+      }
+      .rail-pages :global(button)[aria-current="true"] {
+        background: Highlight;
+      }
+      .rail-prev svg,
+      .rail-next svg {
+        stroke: ButtonText;
+      }
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rail {
+      scroll-behavior: smooth;
+    }
+  }
+</style>
+
+<script>
+  import { initRail } from "../scripts/rail";
+  for (const el of document.querySelectorAll<HTMLElement>("[data-rail]")) initRail(el);
+</script>

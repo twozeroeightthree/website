@@ -1,0 +1,24 @@
+---
+import { SITE, getWorks, workUrl } from "../lib/site";
+
+const works = await getWorks();
+const current = Astro.url.pathname;
+---
+
+<footer class="site-footer">
+  <p><a class="email" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+  <nav class="works-nav" aria-label="Works">
+    <ul role="list">
+      {
+        works.map((work) => (
+          <li>
+            <a href={workUrl(work)} aria-current={current === workUrl(work) ? "page" : undefined}>
+              {work.data.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  <p class="copyright">© {SITE.author} - all rights reserved {new Date().getFullYear()}</p>
+</footer>

@@ -1,0 +1,140 @@
+---
+import { Picture, getImage } from "astro:assets";
+import type { Work } from "../lib/site";
+
+interface Props {
+  work: Work;
+}
+const { work } = Astro.props;
+
+// Co-located video files, resolved to their built URLs
+const videos = import.meta.glob<string>("/src/content/works/*/*.{mp4,webm}", {
+  query: "?url",
+  import: "default",
+  eager: true,
+});
+function videoUrl(name: string, ext: "mp4" | "webm") {
+  const key = `/src/content/works/${work.id}/${name.replace(/^\.\//, "")}.${ext}`;
+  const url = videos[key];
+  if (!url) throw new Error(`${work.id}: missing video ${key}`);
+  return url;
+}
+
+const SIZES = "(min-width: 76.25rem) 345px, (min-width: 56rem) 370px, min(100vw - 50px, 550px)";
+
+const items = await Promise.all(
+  work.data.gallery.map(async (item) => {
+    if ("video" in item) {
+      const poster = await getImage({ src: item.poster, format: "jpg" });
+      return {
+        kind: "video" as const,
+        alt: item.alt,
+        poster: poster.src,
+        mp4: videoUrl(item.video, "mp4"),
+        webm: videoUrl(item.video, "webm"),
+        width: item.poster.width,
+        height: item.poster.height,
+      };
+    }
+    // Large version for the lightbox; the JPEG is also the no-JS link target
+    const large = await getImage({
+      src: item.src,
+      widths: [1024, 1600],
+      sizes: "100vw",
+      format: "webp",
+    });
+    const fallback = await getImage({
+      src: item.src,
+      width: Math.min(item.src.width, 1600),
+      format: "jpg",
+      quality: 80,
+    });
+    return { kind: "image" as const, item, large, href: fallback.src };
+  }),
+);
+---
+
+<ul class="gallery" role="list" data-gallery>
+  {
+    items.map((it, i) =>
+      it.kind === "video" ? (
+        <li class="video">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            poster={it.poster}
+            width={it.width}
+            height={it.height}
+            aria-label={it.alt}
+            data-autoplay
+          >
+            <source src={it.webm} type="video/webm" />
+            <source src={it.mp4} type="video/mp4" />
+          </video>
+        </li>
+      ) : (
+        <li>
+          <a
+            href={it.href}
+            data-lightbox
+            data-srcset={it.large.srcSet.attribute}
+            data-src={it.large.src}
+            data-alt={it.item.alt}
+            data-width={it.item.src.width}
+            data-height={it.item.src.height}
+          >
+            <Picture
+              src={it.item.src}
+              alt={it.item.alt}
+              widths={[345, 550, 690, 1100]}
+              sizes={SIZES}
+              formats={["avif", "webp"]}
+              loading={i < 2 ? "eager" : "lazy"}
+              fetchpriority={i === 0 ? "high" : "auto"}
+            />
+            <span class="visually-hidden">(open larger image)</span>
+          </a>
+        </li>
+      ),
+    )
+  }
+</ul>
+
+<style>
+  .gallery {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: minmax(0, 550px);
+  }
+  .gallery a {
+    display: block;
+    cursor: zoom-in;
+  }
+  .gallery :global(img),
+  .gallery video {
+    width: 100%;
+    height: auto;
+  }
+  @media (min-width: 56rem) {
+    .gallery {
+      grid-template-columns: 370px;
+    }
+  }
+  @media (min-width: 76.25rem) {
+    .gallery {
+      grid-template-columns: repeat(2, 345px);
+    }
+  }
+</style>
+
+<script>
+  // The video replaces an animated GIF; respect reduced motion
+  const still = matchMedia("(prefers-reduced-motion: reduce)");
+  for (const v of document.querySelectorAll<HTMLVideoElement>("video[data-autoplay]")) {
+    const sync = () => (still.matches ? v.pause() : v.play().catch(() => {}));
+    still.addEventListener("change", sync);
+    sync();
+  }
+</script>

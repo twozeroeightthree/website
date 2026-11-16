@@ -1,0 +1,95 @@
+---
+import Base from "../layouts/Base.astro";
+import Rail from "../components/Rail.astro";
+import { SITE, getWorks } from "../lib/site";
+
+const works = await getWorks();
+---
+
+<Base
+  pageClass="home"
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE.title,
+    url: Astro.site?.href,
+    description: SITE.description,
+    author: { "@type": "Person", name: SITE.author },
+  }}
+>
+  <button slot="header" type="button" class="about-toggle" hidden>About</button>
+  <Fragment slot="panel">
+    <h1 class="visually-hidden">2083 — Brendan McCormick</h1>
+    <div class="intro">
+      <p>
+        Located somewhere between art and design. Informed by a simple impulse or thought and
+        largely influenced by process and circumstance, the work attempts to present the qualities
+        inherent in an object or material.
+      </p>
+      <p>
+        Often humble in origin, the work presents common, everyday objects and materials for
+        reappraisal. There is a forensic quality to their presentation - the materials are never
+        permanently, or irreversibly fixed - the intent being to avoid any sense of contamination
+        and minimise the act of intervention.
+      </p>
+    </div>
+  </Fragment>
+  <Rail works={works} />
+</Base>
+
+<style is:global>
+  .intro p {
+    color: var(--muted);
+    line-height: 1.2;
+    word-spacing: 1px;
+    margin-bottom: 1em;
+    font-size: 20px;
+  }
+  .intro p:first-child {
+    font-size: 25px;
+  }
+
+  .about-toggle {
+    display: block;
+    margin-top: 0.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 14px;
+    color: var(--muted);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .about-toggle[hidden] {
+    display: none;
+  }
+
+  @media (min-width: 56rem) {
+    .home[data-expanded] {
+      grid-template-columns: 75px minmax(0, 1fr);
+      grid-template-areas:
+        "header media"
+        "panel  media"
+        "footer footer";
+    }
+    .home[data-expanded] .panel {
+      visibility: hidden;
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+    }
+    .home[data-expanded] .site-footer {
+      padding-top: 1.5rem;
+    }
+  }
+  @media (min-width: 56rem) and (prefers-reduced-motion: no-preference) {
+    .home:not([data-no-transition]) {
+      transition: grid-template-columns 0.4s ease;
+    }
+    .home:not([data-no-transition]) .panel {
+      transition:
+        opacity 0.3s,
+        visibility 0.3s;
+    }
+  }
+</style>

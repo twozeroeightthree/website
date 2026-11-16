@@ -1,0 +1,205 @@
+/* Reset (after Andy Bell's "modern CSS reset") */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+img,
+picture,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Tokens */
+:root {
+  --fg: #000;
+  --bg: #fff;
+  /* 5.3:1 on white; the old greys were 2.3–3:1 */
+  --muted: #6b6b6b;
+  --pad: 25px;
+  --gap: 10px;
+  --side: clamp(18rem, 32vw, 450px);
+  --thumb-w: 345px;
+  --thumb-h: 460px;
+  --font: var(--font-din), Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--fg);
+  background: var(--bg);
+  padding: var(--pad);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+a:hover {
+  text-decoration: none;
+}
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: var(--pad);
+  top: -100px;
+  z-index: 100;
+  background: var(--bg);
+  padding: 0.5em 1em;
+}
+.skip:focus {
+  top: var(--pad);
+}
+
+/* Layout: one column on small screens, [side | media] from 56rem */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "header" "panel" "media" "footer";
+  row-gap: 1.5rem;
+}
+.site-header {
+  grid-area: header;
+}
+.panel {
+  grid-area: panel;
+  max-width: 550px;
+}
+.media {
+  grid-area: media;
+  min-width: 0;
+}
+.site-footer {
+  grid-area: footer;
+  max-width: 550px;
+}
+/* main only groups panel + media semantically; they are laid out by .layout */
+.layout > main {
+  display: contents;
+}
+
+@media (min-width: 56rem) {
+  .layout {
+    grid-template-columns: var(--side) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "header media"
+      "panel  media"
+      "footer media";
+    column-gap: 30px;
+    row-gap: 0;
+    align-items: start;
+  }
+  .panel {
+    max-width: none;
+    padding-top: 0.6rem;
+  }
+  .site-footer {
+    max-width: none;
+    padding-top: 2.5rem;
+  }
+}
+
+.logo {
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Footer */
+.site-footer {
+  font-size: 12px;
+  line-height: 1.5;
+}
+.site-footer .email {
+  font-weight: 300;
+  font-size: 13px;
+  text-decoration: none;
+}
+.site-footer .email:hover {
+  text-decoration: underline;
+}
+.works-nav ul {
+  margin-block: 1em;
+}
+/* inline-block keeps "EX-FOOTBALL" whole while still wrapping between works */
+.works-nav li {
+  display: inline-block;
+  text-transform: uppercase;
+  white-space: pre;
+}
+.works-nav li:not(:last-child)::after {
+  content: " / ";
+  color: var(--muted);
+}
+.works-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.works-nav a:hover,
+.works-nav a[aria-current="page"] {
+  color: var(--fg);
+}
+.copyright {
+  font-weight: 300;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+@media print {
+  .skip,
+  .site-footer,
+  .rail-controls,
+  .work-nav {
+    display: none !important;
+  }
+  .layout {
+    display: block;
+  }
+  .gallery li:not(:first-child) {
+    display: none;
+  }
+}
