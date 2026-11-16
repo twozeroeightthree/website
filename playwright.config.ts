@@ -22,7 +22,9 @@ export default defineConfig({
   reporter: process.env.CI ? [["github"], ["html", { open: "never" }]] : "list",
   snapshotPathTemplate: "tests/screenshots/{arg}{ext}",
   expect: {
-    toHaveScreenshot: { maxDiffPixelRatio: 0.002, animations: "disabled", caret: "hide" },
+    // text antialiasing differs slightly between machines (about 1% of the
+    // pixels on text-heavy pages); layout changes move far more than 2%
+    toHaveScreenshot: { maxDiffPixelRatio: 0.02, animations: "disabled", caret: "hide" },
   },
   use: {
     baseURL,
