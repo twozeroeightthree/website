@@ -68,12 +68,34 @@
         '';
       });
 
-      devShells = forAll (pkgs: {
-        default = pkgs.mkShell {
-          packages = [ pkgs.nodejs_24 ];
-          ASTRO_TELEMETRY_DISABLED = "1";
-        };
-      });
+      devShells = forAll (
+        pkgs:
+        let
+          # must match the @playwright/test version in package.json
+          browsers = pkgs.playwright-driver.browsers.override {
+            withFirefox = false;
+            withWebkit = false;
+          };
+        in
+        {
+          default = pkgs.mkShell {
+            packages = [
+              pkgs.nodejs_24
+              pkgs.lychee
+            ];
+            ASTRO_TELEMETRY_DISABLED = "1";
+            PLAYWRIGHT_BROWSERS_PATH = browsers;
+            PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+            PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "1";
+            # same fonts locally and in CI, so the screenshots match
+            FONTCONFIG_FILE = pkgs.makeFontsConf { fontDirectories = [ pkgs.dejavu_fonts ]; };
+            # Lighthouse reuses Playwright's Chromium
+            shellHook = ''
+              export CHROME_PATH=$(echo $PLAYWRIGHT_BROWSERS_PATH/chromium-*/chrome-*/chrome)
+            '';
+          };
+        }
+      );
 
       formatter = forAll (pkgs: pkgs.nixfmt);
     };

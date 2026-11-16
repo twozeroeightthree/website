@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "test": "playwright test",
+    "test:links": "lychee --root-dir \"$PWD/dist\" dist",
+    "test:lighthouse": "lhci autorun"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.5",
@@ -15,6 +18,12 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@axe-core/playwright": "4.14.0",
+    "@lhci/cli": "0.16.1",
+    "@playwright/test": "1.64.1",
     "typescript": "6.0.3"
+  },
+  "overrides": {
+    "playwright-core": "$@playwright/test"
   }
 }
