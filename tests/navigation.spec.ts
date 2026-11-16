@@ -70,6 +70,9 @@ test("unknown pages get the 404 page", async ({ page }) => {
   expect(res?.status()).toBe(404);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Page not found");
   await expect(page.locator(".index a")).toHaveCount(slugs.length);
+  // /404/ does not exist: no canonical URL pointing there, even in prod
+  await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex");
 });
 
 test("/page2/ redirects home", async ({ page }) => {

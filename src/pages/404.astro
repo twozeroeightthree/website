@@ -5,7 +5,7 @@ import { getWorks, workUrl } from "../lib/site";
 const works = await getWorks();
 ---
 
-<Base title="Page not found">
+<Base title="Page not found" noindex>
   <Fragment slot="panel">
     <h1 id="page-title" class="not-found">Page not found</h1>
     <p>The page you are looking for does not exist. These are the works:</p>

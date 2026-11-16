@@ -7,9 +7,19 @@ interface Props {
   image?: string;
   type?: "website" | "article";
   jsonLd?: Record<string, unknown>;
+  /** Never indexed and no canonical URL, even in prod (404 page) */
+  noindex?: boolean;
 }
 
-const { title, description = SITE.description, image, type = "website", jsonLd } = Astro.props;
+const {
+  title,
+  description = SITE.description,
+  image,
+  type = "website",
+  jsonLd,
+  noindex = false,
+} = Astro.props;
+const indexable = SITE.isProd && !noindex;
 const fullTitle = title ? `${title} — ${SITE.title}` : SITE.title;
 const url = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = image && new URL(image, Astro.site);
@@ -24,12 +34,12 @@ const desc = clip(description);
 
 <title>{fullTitle}</title>
 <meta name="description" content={desc} />
-{SITE.isProd ? <link rel="canonical" href={url} /> : <meta name="robots" content="noindex" />}
+{indexable ? <link rel="canonical" href={url} /> : <meta name="robots" content="noindex" />}
 <meta property="og:site_name" content={SITE.title} />
 <meta property="og:type" content={type} />
 <meta property="og:title" content={title ?? SITE.title} />
 <meta property="og:description" content={desc} />
-<meta property="og:url" content={url} />
+{indexable && <meta property="og:url" content={url} />}
 <meta property="og:locale" content="en" />
 {imageUrl && <meta property="og:image" content={imageUrl} />}
 {imageUrl && <meta property="og:image:width" content="1200" />}
