@@ -16,66 +16,62 @@
         type = "app";
         program = "${pkgs.writeShellScript name text}";
       };
-      jekyllEnv =
-        pkgs:
-        pkgs.bundlerEnv {
-          name = "twozeroeightthree-jekyll";
-          ruby = pkgs.ruby;
-          gemdir = ./.;
+      # prod: indexable, canonical URLs and sitemap. preview: noindex (next and branch previews)
+      mkSite =
+        pkgs: siteEnv:
+        pkgs.buildNpmPackage {
+          pname = "twozeroeightthree.com-${siteEnv}";
+          version = self.shortRev or self.dirtyShortRev or "dev";
+          src = pkgs.lib.fileset.toSource {
+            root = ./.;
+            fileset = pkgs.lib.fileset.unions [
+              ./package.json
+              ./package-lock.json
+              ./astro.config.mjs
+              ./tsconfig.json
+              ./public
+              ./src
+            ];
+          };
+          nodejs = pkgs.nodejs_24;
+          # reads package-lock.json directly: no npmDepsHash to keep in sync
+          npmDeps = pkgs.importNpmLock { npmRoot = ./.; };
+          npmConfigHook = pkgs.importNpmLock.npmConfigHook;
+          env = {
+            SITE_ENV = siteEnv;
+            ASTRO_TELEMETRY_DISABLED = "1";
+          };
+          installPhase = ''
+            runHook preInstall
+            cp -r dist $out
+            runHook postInstall
+          '';
         };
     in
     {
       packages = forAll (pkgs: rec {
-        jekyll = jekyllEnv pkgs;
-        twozeroeightthree = pkgs.stdenv.mkDerivation {
-          pname = "twozeroeightthree.com";
-          version = self.shortRev or self.dirtyShortRev or "dev";
-          src = ./.;
-          nativeBuildInputs = [ jekyll ];
-          buildPhase = ''
-            runHook preBuild
-            export LC_ALL=C.UTF-8
-            JEKYLL_ENV=production jekyll build
-            runHook postBuild
-          '';
-          installPhase = ''
-            runHook preInstall
-            cp -r _site $out
-            runHook postInstall
-          '';
-        };
-        default = twozeroeightthree;
+        prod = mkSite pkgs "prod";
+        preview = mkSite pkgs "preview";
+        default = preview;
       });
 
       apps = forAll (pkgs: {
         serve = mkScript pkgs "serve" ''
-          exec ${
-            self.packages.${pkgs.stdenv.hostPlatform.system}.jekyll
-          }/bin/jekyll serve --watch --incremental --livereload
+          export PATH=${pkgs.nodejs_24}/bin:$PATH
+          [ -d node_modules ] || npm ci
+          exec npm run dev
         '';
         serve-prod = mkScript pkgs "serve-prod" ''
-          JEKYLL_ENV=production exec ${
-            self.packages.${pkgs.stdenv.hostPlatform.system}.jekyll
-          }/bin/jekyll serve --watch --incremental --livereload
-        '';
-        # regenerate Gemfile.lock and gemset.nix after editing Gemfile
-        lock = mkScript pkgs "lock" ''
-          ${pkgs.bundler}/bin/bundle lock --update
-          ${pkgs.bundix}/bin/bundix
+          export PATH=${pkgs.nodejs_24}/bin:$PATH
+          [ -d node_modules ] || npm ci
+          SITE_ENV=prod npm run build && exec npm run preview
         '';
       });
 
       devShells = forAll (pkgs: {
         default = pkgs.mkShell {
-          packages = [
-            self.packages.${pkgs.stdenv.hostPlatform.system}.jekyll
-            pkgs.bundler
-            pkgs.bundix
-          ];
-          shellHook = ''
-            alias serve="jekyll serve --watch --livereload"
-            alias serve-prod="JEKYLL_ENV=production jekyll serve --watch --livereload"
-          '';
+          packages = [ pkgs.nodejs_24 ];
+          ASTRO_TELEMETRY_DISABLED = "1";
         };
       });
 
