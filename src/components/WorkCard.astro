@@ -11,7 +11,7 @@ const { cover, title, location } = work.data;
 ---
 
 <li class="card">
-  <a href={workUrl(work)}>
+  <a href={workUrl(work)} tabindex="-1">
     <Picture
       src={cover.src}
       alt={cover.alt}
@@ -64,7 +64,7 @@ const { cover, title, location } = work.data;
     }
   }
 
-  /* Desktop with a mouse: caption over the top half on hover or focus */
+  /* Desktop with a mouse: caption over the top half on hover */
   @media (min-width: 56rem) and (hover: hover) {
     .caption {
       position: absolute;
@@ -76,12 +76,8 @@ const { cover, title, location } = work.data;
       background: rgb(0 0 0 / 0.6);
       opacity: 0;
     }
-    .card a:is(:hover, :focus-visible) .caption {
+    .card a:hover .caption {
       opacity: 1;
-    }
-    .card a:focus-visible {
-      outline-offset: -4px;
-      outline-color: #fff;
     }
   }
 
