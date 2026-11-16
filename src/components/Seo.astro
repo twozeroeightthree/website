@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { title, description = SITE.description, image, type = "website", jsonLd } = Astro.props;
-const fullTitle = title ? `${title} — ${SITE.title} / ${SITE.author}` : `${SITE.title} / ${SITE.author}`;
+const fullTitle = title ? `${title} — ${SITE.title}` : SITE.title;
 const url = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = image && new URL(image, Astro.site);
 
