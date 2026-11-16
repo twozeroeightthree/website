@@ -22,9 +22,11 @@ jobs:
       actions: read
       contents: read
       deployments: write
+    outputs:
+      url: ${{ steps.muelle.outputs.url }}
     steps:
       # lists the build on the muelle listing while it runs
-      - uses: haztecaso/muelle@736e277565f91b61158287ec910fb3ea80b2282d # v2.2.0
+      - uses: haztecaso/muelle@e0c56b8e5b87598926016c3f300b0c887c28f5bd # v3.0.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
@@ -43,7 +45,8 @@ jobs:
           name: site
           path: site
           retention-days: 1
-      - uses: haztecaso/muelle@736e277565f91b61158287ec910fb3ea80b2282d # v2.2.0
+      - id: muelle
+        uses: haztecaso/muelle@e0c56b8e5b87598926016c3f300b0c887c28f5bd # v3.0.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
@@ -53,7 +56,7 @@ jobs:
           artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
       # lists the build as failed if it never got to deploy
       - if: failure() || cancelled()
-        uses: haztecaso/muelle@736e277565f91b61158287ec910fb3ea80b2282d # v2.2.0
+        uses: haztecaso/muelle@e0c56b8e5b87598926016c3f300b0c887c28f5bd # v3.0.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
@@ -61,13 +64,45 @@ jobs:
           environment: ${{ github.ref_type == 'tag' && 'prod' || github.ref_name == 'master' && 'next' || 'preview' }}
           action: abort
 
+  # browser tests, accessibility, visual regression and budgets on the
+  # deployed site; broken links on the same build
+  test:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      BASE_URL: ${{ needs.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - uses: actions/download-artifact@v8
+        with:
+          name: site
+          path: dist
+      - run: nix develop -c npm ci
+      - run: nix develop -c npm test
+      - if: ${{ !cancelled() }}
+        run: nix develop -c npm run test:links
+      - if: ${{ !cancelled() }}
+        run: nix develop -c npm run test:lighthouse
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: reports
+          path: |
+            playwright-report
+            test-results
+            .lighthouseci
+          retention-days: 14
+
   teardown:
     if: github.event_name == 'delete' && github.event.ref_type == 'branch' && !startsWith(github.event.ref, 'dependabot/')
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - uses: haztecaso/muelle@736e277565f91b61158287ec910fb3ea80b2282d # v2.2.0
+      - uses: haztecaso/muelle@e0c56b8e5b87598926016c3f300b0c887c28f5bd # v3.0.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
