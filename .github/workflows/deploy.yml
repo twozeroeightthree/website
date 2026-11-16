@@ -26,7 +26,7 @@ jobs:
       url: ${{ steps.muelle.outputs.url }}
     steps:
       # lists the build on the muelle listing while it runs
-      - uses: haztecaso/muelle@e0c56b8e5b87598926016c3f300b0c887c28f5bd # v3.0.0
+      - uses: haztecaso/muelle@d2c9216b438720a9e52d1464f054619fdfd28a5a # v3.1.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
@@ -46,7 +46,7 @@ jobs:
           path: site
           retention-days: 1
       - id: muelle
-        uses: haztecaso/muelle@e0c56b8e5b87598926016c3f300b0c887c28f5bd # v3.0.0
+        uses: haztecaso/muelle@d2c9216b438720a9e52d1464f054619fdfd28a5a # v3.1.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
@@ -56,7 +56,7 @@ jobs:
           artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
       # lists the build as failed if it never got to deploy
       - if: failure() || cancelled()
-        uses: haztecaso/muelle@e0c56b8e5b87598926016c3f300b0c887c28f5bd # v3.0.0
+        uses: haztecaso/muelle@d2c9216b438720a9e52d1464f054619fdfd28a5a # v3.1.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
@@ -102,7 +102,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: haztecaso/muelle@e0c56b8e5b87598926016c3f300b0c887c28f5bd # v3.0.0
+      - uses: haztecaso/muelle@d2c9216b438720a9e52d1464f054619fdfd28a5a # v3.1.0
         with:
           endpoint: ${{ secrets.MUELLE_ENDPOINT }}
           site: twozeroeightthree
