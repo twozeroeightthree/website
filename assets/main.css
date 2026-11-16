@@ -254,6 +254,13 @@ footer.footer-post{
   position: fixed;
 }
 
+/* Fixed footer would sit below the fold with no way to scroll to it */
+@media only screen and (max-height: 640px) {
+  #title.post, .panel.post, footer.footer-post{
+    position: absolute;
+  }
+}
+
 @media only screen and (max-width: 1220px) {
   .media.post img:nth-child(2){
     grid-area: auto;

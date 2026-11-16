@@ -22,7 +22,7 @@ layout: default
       <div class="description">
         {{link.title}}
       </div>
-      <img src="{{ link.img }}">
+      <img src="{{ link.img }}" alt="{{ link.alt | default: link.title | replace: "<br>", " " | strip }}">
     </a>
   </div>
   {% endfor %}
@@ -32,5 +32,4 @@ layout: default
 </div>
 <div id="indicators"></div>
 {%include footer.html%}
-<script src="/assets/scripts.js"></script>
 <script src="/assets/home.js"></script>
