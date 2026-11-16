@@ -91,9 +91,11 @@ export function initRail(root: HTMLElement) {
 
   // Coming back to the page (reload or history without bfcache)
   if (location.hash === HASH && wide.matches) {
+    // read before setExpanded, which saves the current (still 0) position
+    const x = history.state?.rail?.x ?? 0;
     layout.setAttribute("data-no-transition", "");
     setExpanded(true);
-    rail.scrollLeft = history.state?.rail?.x ?? 0;
+    rail.scrollLeft = x;
     requestAnimationFrame(() => layout.removeAttribute("data-no-transition"));
   } else {
     prev.hidden = true;
