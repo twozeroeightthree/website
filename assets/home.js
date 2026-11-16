@@ -78,13 +78,14 @@ function responsive() {
   }
 }
 
-$(window).resize(function () {
-  responsive();
+var resizeFrame;
+$(window).on("resize", function () {
+  cancelAnimationFrame(resizeFrame);
+  resizeFrame = requestAnimationFrame(responsive);
 });
 
-window.setInterval(function () {
-  responsive();
-}, 50);
+// Image heights are only known once they have loaded
+$(window).on("load", responsive);
 
 function updateDelta() {
   // Updates the size of blocks
