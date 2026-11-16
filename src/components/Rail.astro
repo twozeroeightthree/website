@@ -14,10 +14,10 @@ const { works } = Astro.props;
   </ul>
   <div class="rail-controls" hidden>
     <button type="button" class="rail-prev" aria-label="Previous works">
-      <svg viewBox="0 0 20 40" aria-hidden="true"><path d="M18 2 2 20l16 18" /></svg>
+      <svg viewBox="0 0 187 442" aria-hidden="true"><path d="M12.3,441.2c-2.6,0-5.1-0.8-7.3-2.5c-5.4-4.1-6.5-11.7-2.4-17.1l150.7-201L2.5,19.6c-4.1-5.4-3-13.1,2.4-17.1C10.4-1.6,18-0.5,22.1,4.9l161.8,215.7L22.1,436.3C19.7,439.5,16,441.2,12.3,441.2z" /></svg>
     </button>
     <button type="button" class="rail-next" aria-label="Next works">
-      <svg viewBox="0 0 20 40" aria-hidden="true"><path d="m2 2 16 18L2 38" /></svg>
+      <svg viewBox="0 0 187 442" aria-hidden="true"><path d="M12.3,441.2c-2.6,0-5.1-0.8-7.3-2.5c-5.4-4.1-6.5-11.7-2.4-17.1l150.7-201L2.5,19.6c-4.1-5.4-3-13.1,2.4-17.1C10.4-1.6,18-0.5,22.1,4.9l161.8,215.7L22.1,436.3C19.7,439.5,16,441.2,12.3,441.2z" /></svg>
     </button>
     <div class="rail-pages" role="group" aria-label="Pages"></div>
   </div>
@@ -55,36 +55,39 @@ const { works } = Astro.props;
     .rail-controls:not([hidden]) {
       display: block;
     }
+    /* Same size and place as the old arrow: 90×150 hit area near the window edge */
     .rail-prev,
     .rail-next {
       position: absolute;
-      top: calc(var(--thumb-h) / 2 - 50px);
-      width: 44px;
-      height: 100px;
+      top: calc(var(--thumb-h) / 2 - 75px);
+      width: 90px;
+      height: 150px;
       display: grid;
       place-items: center;
+      padding: 0;
       background: none;
       border: 0;
       cursor: pointer;
       /* keeps the white chevron visible over light photos */
-      filter: drop-shadow(0 0 3px rgb(0 0 0 / 0.6));
+      filter: drop-shadow(0 0 2px rgb(0 0 0 / 0.5));
     }
     .rail-prev {
       left: 0;
     }
     .rail-next {
-      right: 0;
+      right: calc(5px - var(--pad));
     }
     .rail-prev[hidden] {
       display: none;
     }
     .rail-prev svg,
     .rail-next svg {
-      width: 20px;
-      height: 40px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 2.5;
+      width: 32px;
+      height: 76px;
+      fill: #fff;
+    }
+    .rail-prev svg {
+      transform: scaleX(-1);
     }
     .rail-pages {
       display: flex;
@@ -118,7 +121,7 @@ const { works } = Astro.props;
       }
       .rail-prev svg,
       .rail-next svg {
-        stroke: ButtonText;
+        fill: ButtonText;
       }
     }
   }
