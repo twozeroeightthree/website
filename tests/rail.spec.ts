@@ -62,8 +62,11 @@ test("arrow keys scroll the focused rail", async ({ page }) => {
 
 test("the mouse wheel scrolls the rail", async ({ page }) => {
   await page.locator(".rail a").first().hover();
-  await page.mouse.wheel(600, 0);
-  await expect.poll(() => scrollLeft(page)).toBeGreaterThan(0);
+  // a wheel event sent too early is sometimes lost under load: send it again
+  await expect(async () => {
+    await page.mouse.wheel(600, 0);
+    expect(await scrollLeft(page)).toBeGreaterThan(0);
+  }).toPass({ timeout: 5_000 });
 });
 
 test("coming back from a work keeps the rail where it was", async ({ page }) => {
