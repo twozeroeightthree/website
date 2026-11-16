@@ -1,0 +1,16 @@
+name: check
+
+# Dependabot branches are not deployed (no secrets), so build them here
+on:
+  pull_request:
+
+jobs:
+  build:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+      - run: nix build -L .#preview

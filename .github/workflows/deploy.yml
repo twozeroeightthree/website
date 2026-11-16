@@ -33,7 +33,8 @@ jobs:
           action: announce
       - uses: actions/checkout@v7
       - uses: cachix/install-nix-action@v31
-      - run: nix build -L
+      # tags build the indexable prod site, everything else the noindex preview
+      - run: nix build -L .#${{ github.ref_type == 'tag' && 'prod' || 'preview' }}
       # dereference the store symlink so the artifact holds plain files
       - run: cp -rL result site
       - id: upload
