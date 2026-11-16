@@ -4,8 +4,12 @@ import Seo from "../components/Seo.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import "../styles/global.css";
 
-type Props = Parameters<typeof Seo>[0] & { pageClass?: string };
-const { pageClass, ...seo } = Astro.props;
+type Props = Parameters<typeof Seo>[0] & {
+  pageClass?: string;
+  /** Put the footer after the media so it is tabbed to last (home page) */
+  footerLast?: boolean;
+};
+const { pageClass, footerLast = false, ...seo } = Astro.props;
 ---
 
 <!doctype html>
@@ -28,11 +32,12 @@ const { pageClass, ...seo } = Astro.props;
         <section class="panel" id="content" tabindex="-1" aria-labelledby="page-title">
           <slot name="panel" />
         </section>
-        <SiteFooter />
+        {!footerLast && <SiteFooter />}
       </div>
       <main class="media">
         <slot />
       </main>
+      {footerLast && <SiteFooter />}
     </div>
   </body>
 </html>

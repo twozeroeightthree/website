@@ -9,7 +9,7 @@ const { works } = Astro.props;
 ---
 
 <section class="works" aria-label="Works" data-rail>
-  <ul class="rail" role="list" tabindex="0" aria-label="Works, scroll horizontally">
+  <ul class="rail" role="list">
     {works.map((work, i) => <WorkCard work={work} eager={i < 3} />)}
   </ul>
   <div class="rail-controls" hidden>

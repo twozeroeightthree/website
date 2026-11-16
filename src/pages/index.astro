@@ -8,6 +8,7 @@ const works = await getWorks();
 
 <Base
   pageClass="home"
+  footerLast
   jsonLd={{
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -65,10 +66,29 @@ const works = await getWorks();
   }
 
   @media (min-width: 56rem) {
+    /* The home page does not scroll vertically, so the footer can sit in
+       its own row after the rail in the DOM (and in the tab order) */
+    .layout.home {
+      grid-template-areas:
+        "side   media"
+        "footer media";
+      grid-template-rows: auto 1fr;
+    }
+    .home .side {
+      position: static;
+    }
+    .home .site-footer {
+      grid-area: footer;
+      max-width: var(--side);
+      padding-top: 1rem;
+    }
     /* Expanded: the text fades out, the rail takes its place and the
        footer drops below the rail, as on the old site */
-    .home[data-expanded] {
+    .layout.home[data-expanded] {
       grid-template-columns: 75px minmax(0, 1fr);
+      grid-template-areas:
+        "side   media"
+        "footer footer";
     }
     .home[data-expanded] .side {
       overflow: visible;
@@ -80,10 +100,7 @@ const works = await getWorks();
       opacity: 0;
     }
     .home[data-expanded] .site-footer {
-      position: absolute;
-      top: calc(var(--thumb-h) + 35px);
-      width: var(--side);
-      padding-top: 0;
+      padding-top: 0.5rem;
     }
   }
   @media (min-width: 56rem) and (prefers-reduced-motion: no-preference) {
